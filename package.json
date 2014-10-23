@@ -23,7 +23,8 @@
     "node": ">= 0.10"
   },
   "files": [
-    "dist/**"
+    "dist",
+    "!dist/test"
   ],
   "scripts": {
     "prepublish": "grunt",
