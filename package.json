@@ -27,8 +27,8 @@
     "!dist/test"
   ],
   "scripts": {
-    "prepublish": "grunt",
-    "test": "npm run prepublish && mocha dist/test/*.js"
+    "prepublish": "npm rm grunt-6to5 && npm i --ignore-scripts && npm test",
+    "test": "grunt && mocha dist/test/*.js"
   },
   "author": {
     "name": "Ult Combo",
