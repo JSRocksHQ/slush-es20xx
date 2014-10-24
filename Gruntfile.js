@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
@@ -7,7 +9,7 @@ module.exports = function(grunt) {
 		'6to5': {
 			options: {
 			},
-			build: {
+			src: {
 				files: [{
 					expand: true,
 					cwd: 'src/',
@@ -17,7 +19,7 @@ module.exports = function(grunt) {
 			},
 		},
 		copy: {
-			build: {
+			src: {
 				files: [{
 					expand: true,
 					cwd: 'src/',
@@ -26,7 +28,29 @@ module.exports = function(grunt) {
 				}],
 			},
 		},
+		jshint: {
+			options: {
+				jshintrc: true,
+			},
+			src: ['src/**/*.js'],
+		},
+		jscs: {
+			options: {
+				config: '.jscsrc',
+				esnext: true,
+				reporter: 'inline',
+			},
+			src: ['src/**/*.js'],
+		},
+		mochaTest: {
+			options: {
+				timeout: 5000,
+			},
+			src: ['dist/test/*.js'],
+		},
 	});
 
-	grunt.registerTask('default', ['clean', '6to5', 'copy']);
+	grunt.registerTask('build', ['clean', '6to5', 'copy']);
+	grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest']);
+	grunt.registerTask('default', ['build', 'test']);
 };

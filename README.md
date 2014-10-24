@@ -11,5 +11,4 @@ ECMAScript.next Node.js package skeleton using the 6to5 transpiler.
 ## TODO
 
 - Watch task with incremental build;
-- Check if prepublish script and package.json's [`files`](https://github.com/UltCombo/6to5-node-skeleton/blob/master/package.json#L25-L27) setting is working properly;
 - Write docs.

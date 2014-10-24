@@ -1,4 +1,6 @@
 language: node_js
+before_script:
+  - grunt build
 node_js:
   - "0.10"
   - "0.11"
