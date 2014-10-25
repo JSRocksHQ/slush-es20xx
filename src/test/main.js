@@ -17,4 +17,8 @@ describe('Skeleton', function() {
 	it('should copy non-js files to dist', function() {
 		require('../config.json').x.should.equal('x');
 	});
+
+	it('should fail', function() {
+		false.should.be.true;
+	});
 });
