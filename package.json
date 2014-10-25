@@ -1,23 +1,16 @@
 {
-  "name": "6to5-node-skeleton",
+  "name": "my-awesome-es6-node-package",
   "version": "1.0.0",
-  "description": "ECMAScript.next Node.js package skeleton using the 6to5 transpiler.",
+  "description": "Hello ES6 World!",
   "main": "dist/index.js",
   "keywords": [
-    "ES6",
-    "ECMAScript6",
-    "ECMAScript 6",
-    "ECMAScript.next",
-    "skeleton",
-    "seed",
-    "workflow"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/UltCombo/6to5-node-skeleton.git"
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git"
   },
   "bugs": {
-    "url": "https://github.com/UltCombo/6to5-node-skeleton/issues"
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY/issues"
   },
   "engines": {
     "node": ">= 0.10"
@@ -27,12 +20,13 @@
     "!dist/test"
   ],
   "scripts": {
+    "dev": "grunt",
     "prepublish": "npm i grunt-6to5 && grunt build && npm test",
     "test": "grunt test"
   },
   "author": {
-    "name": "Ult Combo",
-    "email": "ultcombo@gmail.com"
+    "name": "YOUR_NAME",
+    "email": "YOUR_EMAIL"
   },
   "license": "WTFPL",
   "devDependencies": {
