@@ -1,6 +1,7 @@
 language: node_js
-before_script:
-  - grunt build
+install: ~
+script:
+  - npm i # `npm i` without any arguments triggers the `prepublish` script which builds and tests
 node_js:
   - "0.10"
   - "0.11"

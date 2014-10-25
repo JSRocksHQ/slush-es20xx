@@ -21,8 +21,8 @@
   ],
   "scripts": {
     "dev": "grunt",
-    "prepublish": "npm i grunt-6to5 && grunt build && npm test",
-    "test": "grunt test"
+    "prepublish": "npm i grunt-6to5 && npm test",
+    "test": "grunt build test"
   },
   "author": {
     "name": "YOUR_NAME",

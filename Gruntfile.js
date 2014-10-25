@@ -43,7 +43,6 @@ module.exports = function(grunt) {
 		mochaTest: {
 			options: {
 				timeout: 5000,
-				reporter: 'nyan',
 				clearRequireCache: true, // necessary for `watch` task
 			},
 			src: 'dist/test/*.js',
