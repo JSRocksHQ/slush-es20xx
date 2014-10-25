@@ -1,5 +1,5 @@
 language: node_js
-install: ~
+install: ""
 script:
   - npm i # `npm i` without any arguments triggers the `prepublish` script which builds and tests
 node_js:
