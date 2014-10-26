@@ -24,7 +24,7 @@ Scaffold a new project:
 slush es6
 ```
 
-Then open a terminal, `cd` to the project root and run `npm run dev`. You're all set, happy hacking!
+Then `cd` to the project root and run `npm run dev`. You're all set, happy hacking!
 
 # Architecture
 
