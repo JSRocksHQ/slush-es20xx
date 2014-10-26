@@ -17,7 +17,8 @@
   },
   "files": [
     "dist",
-    "!dist/test"
+    "!dist/test",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "grunt",
