@@ -1,4 +1,4 @@
-# IN DEVELOPMENT - NOT READY FOR USE IT
+# IN DEVELOPMENT - NOT READY FOR USE YET
 
 # [slush](https://github.com/slushjs/slush)-es6
 [![NPM version](http://img.shields.io/npm/v/slush-es6.svg)](https://npmjs.org/package/slush-es6)
