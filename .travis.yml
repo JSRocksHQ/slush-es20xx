@@ -1,7 +1,7 @@
 language: node_js
-install: ""
-script:
-  - npm i # `npm i` without any arguments triggers the `prepublish` script which builds and tests
 node_js:
   - "0.10"
   - "0.11"
+install: ""
+# `npm i` without any arguments triggers the `prepublish` script which builds and tests
+script: "npm i"

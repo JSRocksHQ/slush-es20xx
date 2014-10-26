@@ -21,7 +21,7 @@ The `npm run dev` command is an alias for running `grunt`'s default task. The ad
 
 ## Grunt tasks
 
-- `grunt` (default): executes `build`, `test` and `watch` tasks.
-- `grunt build`: this task will build the `dist` directory based on the `src` directory's contents. More specifically, it will make a new build by transpiling all of the `src` directory's `.js` files and copying all non-JS files to `dist`, keeping the same directory structure.
+- `grunt` (default): executes the `build`, `test` and `watch` tasks.
+- `grunt build`: this task will build the `dist` directory based on the `src` directory's contents. More specifically, it will transpile all of the `src` directory's `.js` files and copy over all other files to `dist`, keeping the same directory structure.
 - `grunt test`: runs JSHint, JSCS and Mocha tests.
 - `grunt watch`: watches the `src` directory for changes, incrementally builds `dist` and runs the corresponding tests.
