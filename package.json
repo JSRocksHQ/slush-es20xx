@@ -1,0 +1,57 @@
+{
+  "name": "slush-es6",
+  "version": "1.0.0",
+  "description": "ECMAScript.next projects generator.",
+  "main": "slushfile.js",
+  "keywords": [
+    "slushgenerator",
+    "es6",
+    "es7",
+    "es.next",
+    "ecmascript.next",
+    "js.next",
+    "javascript.next",
+    "6to5",
+    "traceur",
+    "modular",
+    "modularity",
+    "workflow",
+    "generator",
+    "scaffolding",
+    "node.js",
+    "nodejs",
+    "node",
+    "web",
+    "webapp"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/es6rocks/slush-es6.git"
+  },
+  "bugs": {
+    "url": "https://github.com/es6rocks/slush-es6/issues"
+  },
+  "homepage": "https://github.com/es6rocks/slush-es6",
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": {
+    "name": "Ult Combo",
+    "email": "ultcombo@gmail.com"
+  },
+  "license": "WTFPL",
+  "dependencies": {
+    "gulp": "^3.8.9",
+    "gulp-conflict": "^0.2.0",
+    "gulp-install": "^0.2.0",
+    "gulp-template": "^1.1.1",
+    "inquirer": "^0.8.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1",
+    "should": "^4.1.0"
+  }
+}
