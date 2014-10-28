@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Hello ES6 World!",
   "main": "dist/index.js",
-  "keywords": [
-  ],
+  "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git"
@@ -42,7 +41,6 @@
     "grunt-jscs": "^0.8.1",
     "grunt-mocha-test": "^0.12.2",
     "load-grunt-tasks": "^1.0.0",
-    "mocha": "^2.0.0",
     "should": "^4.1.0"
   }
 }
