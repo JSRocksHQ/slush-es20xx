@@ -1,8 +1,8 @@
 # <%= pkgName %>
-[![NPM version](https://badge.fury.io/js/<%= pkgName %>.png)](https://npmjs.org/package/<%= pkgName %>)
-[![Build Status](https://travis-ci.org/<%= ghUser %>/<%= ghRepo %>.png?branch=master)](https://travis-ci.org/<%= ghUser %>/<%= ghRepo %>)
-[![Dependency Status](https://david-dm.org/<%= ghUser %>/<%= ghRepo %>.png)](https://david-dm.org/<%= ghUser %>/<%= ghRepo %>)
-[![devDependency Status](https://david-dm.org/<%= ghUser %>/<%= ghRepo %>/dev-status.png)](https://david-dm.org/<%= ghUser %>/<%= ghRepo %>#info=devDependencies)
+[![npm version](http://img.shields.io/npm/v/<%= pkgName %>.svg)](https://npmjs.org/package/<%= pkgName %>)
+[![Build Status](http://img.shields.io/travis/<%= ghUser %>/<%= ghRepo %>.svg)](https://travis-ci.org/<%= ghUser %>/<%= ghRepo %>)
+[![Dependency Status](http://img.shields.io/david/<%= ghUser %>/<%= ghRepo %>.svg)](https://david-dm.org/<%= ghUser %>/<%= ghRepo %>)
+[![devDependency Status](http://img.shields.io/david/dev/<%= ghUser %>/<%= ghRepo %>.svg)](https://david-dm.org/<%= ghUser %>/<%= ghRepo %>#info=devDependencies)
 
 <%= pkgDescription %>
 
