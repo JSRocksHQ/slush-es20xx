@@ -1,19 +1,22 @@
 {
-  "name": "my-awesome-es6-node-package",
+  "name": <%= JSON.stringify(pkgName) %>,
   "version": "1.0.0",
-  "description": "Hello ES6 World!",
+  "description": <%= JSON.stringify(pkgDescription) %>,
   "main": "dist/index.js",
-  "keywords": [],
+  "keywords": <%=
+    // extra array wrapper to reach the desired indentation level, slice its leading "[\n  " (leading whitespace striped for OTBS) and trailing "\n]"
+    JSON.stringify([keywords], null, 2).slice(4, -2)
+  %>,
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git"
+    "url": "https://github.com/<%= ghUser %>/<%= ghRepo %>.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY/issues"
+    "url": "https://github.com/<%= ghUser %>/<%= ghRepo %>/issues"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/YOUR_REPOSITORY",
+  "homepage": <%= JSON.stringify(homepage) %>,
   "engines": {
-    "node": ">= 0.10"
+    "node": <%= JSON.stringify(enginesNode) %>
   },
   "files": [
     "dist",
@@ -26,10 +29,10 @@
     "test": "grunt build test"
   },
   "author": {
-    "name": "YOUR_NAME",
-    "email": "YOUR_EMAIL"
+    "name": <%= JSON.stringify(authorName) %>,
+    "email": <%= JSON.stringify(authorEmail) %>
   },
-  "license": "WTFPL",
+  "license": <%= JSON.stringify(license) %>,
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-6to5": "^1.0.1",
