@@ -48,3 +48,5 @@ Want to help developing slush-es6? Awesome! Here are the basic instructions to g
 - Create a test directory somewhere else, `cd` to it and run `slush es6` to execute this generator;
 - Edit the source code in your repository and then test the changes by running `slush es6` in a test directory. Repeat until you get the desired result;
 - Commit your changes to a new feature/bugfix branch, push them to your fork and open a PR in this repository. See [GitHub Flow](https://guides.github.com/introduction/flow/index.html) if you are not used to it yet. `=]`
+
+**Note:** you must have [Slush](https://github.com/slushjs/slush) installed in order to execute slush generators.
