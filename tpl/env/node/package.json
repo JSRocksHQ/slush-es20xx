@@ -25,6 +25,7 @@
   ],
   "scripts": {
     "dev": "grunt",
+    "dev-gulp": "gulp",
     "prepublish": "npm i grunt-6to5 && npm test",
     "test": "grunt build"
   },
@@ -43,7 +44,19 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jscs": "^0.8.1",
     "grunt-mocha-test": "^0.12.2",
+    "gulp": "^3.8.9",
+    "gulp-6to5": "^1.0.1",
+    "gulp-filter": "^1.0.2",
+    "gulp-jscs": "^1.2.1",
+    "gulp-jshint": "^1.8.6",
+    "gulp-mocha": "^1.1.1",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-watch": "^1.1.0",
     "load-grunt-tasks": "^1.0.0",
-    "should": "^4.1.0"
+    "lodash.createcallback": "^2.4.1",
+    "merge-stream": "^0.1.6",
+    "rimraf": "^2.2.8",
+    "should": "^4.1.0",
+    "through": "^2.3.6"
   }
 }
