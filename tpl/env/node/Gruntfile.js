@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 					event: ['added', 'changed'],
 				},
 				files: 'src/**/*.js',
-				tasks: ['6to5', 'test'],
+				tasks: ['lint', '6to5', 'mochaTest'],
 			},
 			copy: {
 				options: {
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('build', ['clean', '6to5', 'copy']);
-	grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest']);
-	grunt.registerTask('default', ['build', 'test', 'watch']);
+	grunt.registerTask('lint', ['jshint', 'jscs']);
+	grunt.registerTask('build', ['lint', 'clean', '6to5', 'copy', 'mochaTest']);
+	grunt.registerTask('default', ['build', 'watch']);
 };
