@@ -1,5 +1,4 @@
 // jshint mocha: true
-'use strict';
 
 import {x as importedX} from '../..';
 

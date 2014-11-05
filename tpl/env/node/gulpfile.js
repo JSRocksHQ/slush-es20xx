@@ -1,86 +1,78 @@
+'use strict';
+
 var gulp = require('gulp'),
 	watch = require('gulp-watch'),
 	to5 = require('gulp-6to5'),
 	jshint = require('gulp-jshint'),
 	jscs = require('gulp-jscs'),
 	mocha = require('gulp-mocha'),
+	gulpFilter = require('gulp-filter'),
+	gulpRimraf = require('gulp-rimraf'),
 	rimraf = require('rimraf'),
 	through = require('through'),
-	mergeStream = require('merge-stream');
+	mergeStream = require('merge-stream'),
+	lazypipe = require('lazypipe'),
+	baseSrc = 'src',
+	jsSrc = 'src/**/*.js',
+	copySrc = ['src/**', '!' + jsSrc], // TODO refactor -- get this data from JSON
+	handleJs = lazypipe()
+		.pipe(jshint)
+		.pipe(jshint.reporter, 'jshint-stylish')
+		.pipe(jshint.reporter, 'fail')
+		.pipe(jscs, { configPath: '.jscsrc', esnext: true })
+		.pipe(to5/*, { blacklist: ['generators'] }*/)
+		.pipe(gulp.dest, 'dist'),
+	handleCopy = lazypipe()
+		.pipe(gulp.dest, 'dist');
 
-
+function runTests() {
+	return gulp.src('dist/test/*.js', { read: false })
+		.pipe(mocha(/*{ bail: true, timeout: 5000 }*/));
+}
 function runAfterEnd(cb) {
 	// This is basically a passThrough stream for the callback's stream.
 	// It waits until all data is finished being piped into it and discards this data,
 	// then passes through the data from the stream provided by the callback.
 	return through(function() {}, function() {
-		var thisStream = this,
-			cbStream = cb();
+		var cbStream = cb();
 		['data', 'end', 'error'].forEach(function(event) {
-			cbStream.on(event, thisStream.emit.bind(thisStream, event));
-		});
+			cbStream.on(event, this.emit.bind(this, event));
+		}, this);
 	});
 }
 
-gulp.task('default', function() {
+gulp.task('build', function() {
 	rimraf.sync('dist');
-
-	var base = 'src',
-		jsSrc = 'src/**/*.js',
-		copySrc = ['src/**', '!' + jsSrc];
-
-	function handleJs(stream) {
-		return stream
-			.pipe(jshint())
-			.pipe(jscs({ esnext: true }))
-			.pipe(to5(/*{ blacklist: ['generators'] }*/))
-			.pipe(gulp.dest('dist'));
-	}
-	function handleCopy(stream) {
-		return stream.pipe(gulp.dest('dist'));
-	}
-	function runTests() {
-		return gulp.src('dist/test/*.js', { read: false })
-			.pipe(mocha({ timeout: 5000 }));
-	}
-
 	return mergeStream(
-			handleJs(gulp.src(jsSrc, { base: base })),
-			handleCopy(gulp.src(copySrc, { base: base }))
+			gulp.src(jsSrc, { base: baseSrc }).pipe(handleJs()),
+			gulp.src(copySrc, { base: baseSrc }).pipe(handleCopy())
 		)
-		.pipe(runAfterEnd(runTests))
-		.pipe(runAfterEnd(function() {
-			watch(jsSrc, { base: base }, runTestsAfter.bind(null, handleJs));
-			watch(copySrc, { base: base }, runTestsAfter.bind(null, handleCopy));
-
-			// return an endless passThrough stream to prevent the gulp task from exiting
-			return through();
-		}));
-
-	function runTestsAfter(cb, files) {
-		return cb(files)
-			.pipe(runAfterEnd(runTests));
-	}
-	// .on('end', function() {
-	// 	runTests().on('end', function() {
-	// 		watch(jsSrc, { base: base }, handleJs);
-	// 		watch(copySrc, { base: base }, handleCopy);
-	// 	})
-	// })
-
-
-
-	// .on('end', function() {
-	// 	console.log('ended tests');
-	// 	// watch(jsSrc, { base: base }, handleJs);
-	// 	// watch(copySrc, { base: base }, handleCopy);
-	// });
-	// }).resume();
-
-
-	// watch(jsSrc, { base: base }, handleJs);
-
-	// watch(copySrc, { base: base }, handleCopy);
+		.pipe(runAfterEnd(runTests));
 });
 
-// gulp.task('default', ['build']);
+gulp.task('default', ['build'], function() {
+	function filterEvent(events, file) {
+		return [].concat(events).indexOf(file.event) !== -1;
+	}
+
+	return watch('src/**', { base: baseSrc }, function(files) {
+		var jsFilter = gulpFilter('**/*.js'),    // TODO refactor -- get from json
+			copyFilter = gulpFilter('!**/*.js'), // TODO same as above + negate
+			existsFilter = gulpFilter(filterEvent.bind(null, ['changed', 'added'])),
+			deletedFilter = gulpFilter(filterEvent.bind(null, 'deleted'));
+
+		return files
+			.pipe(existsFilter)
+				.pipe(jsFilter)
+					.pipe(handleJs())
+				.pipe(jsFilter.restore())
+				.pipe(copyFilter)
+					.pipe(handleCopy())
+				// .pipe(copyFilter.restore()) // unnecessary as this set of files wouldn't be used
+			.pipe(existsFilter.restore())
+			.pipe(deletedFilter)
+				.pipe(gulpRimraf())
+			// .pipe(deletedFilter.restore()) // unnecessary as runAfterEnd() discards piped data
+			.pipe(runAfterEnd(runTests));
+	});
+});
