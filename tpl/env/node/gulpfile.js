@@ -50,29 +50,28 @@ gulp.task('build', function() {
 		.pipe(runAfterEnd(runTests));
 });
 
-gulp.task('default', ['build'], function() {
+gulp.task('default', ['build'], function(done /* `done` is never called as this is an endless task */) {
 	function filterEvent(events, file) {
-		return [].concat(events).indexOf(file.event) !== -1;
+		return events.indexOf(file.event) !== -1;
 	}
 
-	return watch('src/**', { base: baseSrc }, function(files) {
+	watch('src/**', { base: baseSrc }, function(files) {
 		var jsFilter = gulpFilter('**/*.js'),    // TODO refactor -- get from json
 			copyFilter = gulpFilter('!**/*.js'), // TODO same as above + negate
 			existsFilter = gulpFilter(filterEvent.bind(null, ['changed', 'added'])),
-			deletedFilter = gulpFilter(filterEvent.bind(null, 'deleted'));
+			deletedFilter = gulpFilter(filterEvent.bind(null, ['deleted'])),
+			existsStream = files.pipe(existsFilter);
 
-		return files
-			.pipe(existsFilter)
+		return mergeStream(
+			existsStream
 				.pipe(jsFilter)
-					.pipe(handleJs())
-				.pipe(jsFilter.restore())
+				.pipe(handleJs()),
+			existsStream
 				.pipe(copyFilter)
-					.pipe(handleCopy())
-				// .pipe(copyFilter.restore()) // unnecessary as this set of files wouldn't be used
-			.pipe(existsFilter.restore())
-			.pipe(deletedFilter)
+				.pipe(handleCopy()),
+			files.pipe(deletedFilter)
 				.pipe(gulpRimraf())
-			// .pipe(deletedFilter.restore()) // unnecessary as runAfterEnd() discards piped data
-			.pipe(runAfterEnd(runTests));
+		)
+		.pipe(runAfterEnd(runTests));
 	});
 });
