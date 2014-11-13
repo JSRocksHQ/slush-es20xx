@@ -35,6 +35,7 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "devDependencies": {
+    "chalk": "^0.5.1",
     "grunt": "^0.4.5",
     "grunt-6to5": "^1.0.1",
     "grunt-cli": "^0.1.13",
@@ -51,6 +52,7 @@
     "gulp-jshint": "^1.8.6",
     "gulp-mocha": "^1.1.1",
     "gulp-rimraf": "^0.1.1",
+    "gulp-util": "^3.0.1",
     "gulp-watch": "^1.1.0",
     "jshint-stylish": "^1.0.0",
     "lazypipe": "^0.2.2",
