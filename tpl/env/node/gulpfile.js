@@ -78,9 +78,9 @@ gulp.task('default', ['build'], function(neverEnd) {
 				.pipe(gulpRimraf())
 		)
 		.pipe(runAfterEnd(runTests));
+	}).on('ready', function() {
+		gutil.log('Watching ' + chalk.magenta('src') + ' directory for changes...'); //TODO refactor
 	}).on('error', function(err) {
 		console.error(err.message);
-	})._gaze.on('ready', function() {
-		gutil.log('Watching ' + chalk.magenta('src') + ' directory for changes...'); //TODO refactor
 	});
 });
