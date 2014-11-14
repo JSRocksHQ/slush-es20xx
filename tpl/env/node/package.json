@@ -53,7 +53,7 @@
     "gulp-mocha": "^1.1.1",
     "gulp-rimraf": "^0.1.1",
     "gulp-util": "^3.0.1",
-    "gulp-watch": "^1.1.0",
+    "gulp-watch": "^1.2.0",
     "jshint-stylish": "^1.0.0",
     "lazypipe": "^0.2.2",
     "load-grunt-tasks": "^1.0.0",

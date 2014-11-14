@@ -52,23 +52,14 @@ gulp.task('build', function() {
 		.pipe(runAfterEnd(runTests));
 });
 
-// `neverEnd` receives a task conclusion callback which is never called as this watch task is endless.
-// We don't return gulp-watch's endless stream as it would fail the task in the first unhandled
-// stream error, instead, we signal this is an endless task by receiving a callback which is
-// never called and handle errors with our own domain.
+// `neverEnd` receives a task conclusion callback which is never called as to signal that this watch task should never end.
+// We don't return gulp-watch's endless stream as it would fail the task in the first stream error.
 gulp.task('default', ['build'], function(neverEnd) {
 	function filterEvent(events, file) {
 		return events.indexOf(file.event) !== -1;
 	}
 
-	var d = require('domain').create();
-	// TODO FIXME this "catch all" approach will most likely cause memory leaks
-	d.on('error', function(err) {
-		// TODO skip gulp-jscs once jscs reporters are added to the lazypipe
-		if (err.plugin && ['gulp-jshint'/*, 'gulp-jscs'*/].indexOf(err.plugin) !== -1) return;
-		console.error(err.message);
-	});
-	d.add(watch('src/**', { base: baseSrc }, function(files) {
+	watch('src/**', { base: baseSrc }, function(files) {
 		// TODO filter buffers with repeated file paths
 		var jsFilter = gulpFilter('**/*.js'),    // TODO refactor -- get from json
 			copyFilter = gulpFilter('!**/*.js'), // TODO same as above + negate
@@ -87,6 +78,9 @@ gulp.task('default', ['build'], function(neverEnd) {
 				.pipe(gulpRimraf())
 		)
 		.pipe(runAfterEnd(runTests));
-	}));
-	gutil.log('Watching ' + chalk.magenta('src') + ' directory for changes...'); //TODO refactor
+	}).on('error', function(err) {
+		console.error(err.message);
+	})._gaze.on('ready', function() {
+		gutil.log('Watching ' + chalk.magenta('src') + ' directory for changes...'); //TODO refactor
+	});
 });
