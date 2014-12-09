@@ -1,0 +1,7 @@
+{
+	"srcBase": "src/",
+	"src": {
+		"js": ["**/*.js"]
+	},
+	"distBase": "dist/"
+}
