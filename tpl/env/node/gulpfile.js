@@ -67,7 +67,7 @@ gulp.task('default', ['build'], function(neverEnd) {
 		// TODO filter buffers with repeated file paths
 		// TODO optimize
 		var jsFilter = plugins.filter(build.src.js),
-			copyFilter = plugins.filter(negateGlobs(build.src.js)),
+			copyFilter = plugins.filter(['**'].concat(negateGlobs(build.src.js))),
 			existsFilter = plugins.filter(filterEvent.bind(null, ['changed', 'added'])),
 			deletedFilter = plugins.filter(filterEvent.bind(null, ['deleted'])),
 			existsStream = files.pipe(existsFilter);
@@ -78,7 +78,7 @@ gulp.task('default', ['build'], function(neverEnd) {
 				.pipe(handleJs()),
 			existsStream
 				.pipe(copyFilter)
-				.pipe(handleCopy()), // TODO FIXME: this seems broken
+				.pipe(handleCopy()),
 			files.pipe(deletedFilter)
 				.pipe(plugins.rimraf()) // TODO FIXME: this seems broken
 		)
