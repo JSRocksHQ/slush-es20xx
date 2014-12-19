@@ -1,6 +1,7 @@
 'use strict';
 
-var gulp = require('gulp'),
+var path = require('path'),
+	gulp = require('gulp'),
 	plugins = require('gulp-load-plugins')(),
 	rimraf = require('rimraf'),
 	through = require('through'),
@@ -17,6 +18,12 @@ var gulp = require('gulp'),
 		.pipe(gulp.dest, build.distBase),
 	handleCopy = lazypipe()
 		.pipe(gulp.dest, build.distBase),
+	handleDeletion = lazypipe()
+		.pipe(plugins.rename, function(filePath) {
+			// we can't change/remove filePath's `base`, so cd out of it in the dirname
+			filePath.dirname = path.join(path.relative(build.srcBase, '.'), build.distBase, filePath.dirname);
+		})
+		.pipe(plugins.rimraf),
 	runTests = lazypipe()
 		.pipe(gulp.src, build.distBase + 'test/*.js', { read: false })
 		.pipe(plugins.mocha/*, { bail: true, timeout: 5000 }*/);
@@ -60,7 +67,7 @@ gulp.task('build', function() {
 // We don't return gulp-watch's endless stream as it would fail the task in the first stream error.
 gulp.task('default', ['build'], function(neverEnd) {
 	function filterEvent(events, file) {
-		return events.indexOf(file.event) !== -1;
+		return ~events.indexOf(file.event);
 	}
 
 	plugins.watch(build.srcBase + '**', { base: build.srcBase }, plugins.batch(function(files) {
@@ -80,7 +87,7 @@ gulp.task('default', ['build'], function(neverEnd) {
 				.pipe(copyFilter)
 				.pipe(handleCopy()),
 			files.pipe(deletedFilter)
-				.pipe(plugins.rimraf()) // TODO FIXME: this seems broken
+				.pipe(handleDeletion())
 		)
 		.pipe(runAfterEnd(runTests));
 	})).on('ready', function() {
