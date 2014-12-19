@@ -1,14 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	watch = require('gulp-watch'),
-	to5 = require('gulp-6to5'),
-	jshint = require('gulp-jshint'),
-	jscs = require('gulp-jscs'),
-	mocha = require('gulp-mocha'),
-	gulpFilter = require('gulp-filter'),
-	gulpRimraf = require('gulp-rimraf'),
+	plugins = require('gulp-load-plugins')(),
 	rimraf = require('rimraf'),
 	through = require('through'),
 	mergeStream = require('merge-stream'),
@@ -16,17 +9,17 @@ var gulp = require('gulp'),
 	chalk = require('chalk'),
 	build = require('./build.json'),
 	handleJs = lazypipe()
-		.pipe(jshint)
-		.pipe(jshint.reporter, 'jshint-stylish')
-		.pipe(jshint.reporter, 'fail')
-		.pipe(jscs, { configPath: '.jscsrc', esnext: true })
-		.pipe(to5/*, { blacklist: ['generators'] }*/)
+		.pipe(plugins.jshint)
+		.pipe(plugins.jshint.reporter, 'jshint-stylish')
+		.pipe(plugins.jshint.reporter, 'fail')
+		.pipe(plugins.jscs, { configPath: '.jscsrc', esnext: true })
+		.pipe(plugins['6to5']/*, { blacklist: ['generators'] }*/)
 		.pipe(gulp.dest, build.distBase),
 	handleCopy = lazypipe()
 		.pipe(gulp.dest, build.distBase),
 	runTests = lazypipe()
 		.pipe(gulp.src, build.distBase + 'test/*.js', { read: false })
-		.pipe(mocha/*, { bail: true, timeout: 5000 }*/);
+		.pipe(plugins.mocha/*, { bail: true, timeout: 5000 }*/);
 
 function negateGlobs(globs) {
 	return globs.map(function(glob) {
@@ -70,13 +63,13 @@ gulp.task('default', ['build'], function(neverEnd) {
 		return events.indexOf(file.event) !== -1;
 	}
 
-	watch(build.srcBase + '**', { base: build.srcBase }, function(files) {
+	plugins.watch(build.srcBase + '**', { base: build.srcBase }, function(files) {
 		// TODO filter buffers with repeated file paths
 		// TODO optimize
-		var jsFilter = gulpFilter(build.src.js),
-			copyFilter = gulpFilter(negateGlobs(build.src.js)),
-			existsFilter = gulpFilter(filterEvent.bind(null, ['changed', 'added'])),
-			deletedFilter = gulpFilter(filterEvent.bind(null, ['deleted'])),
+		var jsFilter = plugins.filter(build.src.js),
+			copyFilter = plugins.filter(negateGlobs(build.src.js)),
+			existsFilter = plugins.filter(filterEvent.bind(null, ['changed', 'added'])),
+			deletedFilter = plugins.filter(filterEvent.bind(null, ['deleted'])),
 			existsStream = files.pipe(existsFilter);
 
 		return mergeStream(
@@ -85,13 +78,13 @@ gulp.task('default', ['build'], function(neverEnd) {
 				.pipe(handleJs()),
 			existsStream
 				.pipe(copyFilter)
-				.pipe(handleCopy()),
+				.pipe(handleCopy()), // TODO FIXME: this seems broken
 			files.pipe(deletedFilter)
-				.pipe(gulpRimraf())
+				.pipe(plugins.rimraf()) // TODO FIXME: this seems broken
 		)
 		.pipe(runAfterEnd(runTests));
 	}).on('ready', function() {
-		gutil.log('Watching ' + chalk.magenta(build.srcBase) + ' directory for changes...');
+		plugins.util.log('Watching ' + chalk.magenta(build.srcBase) + ' directory for changes...');
 	}).on('error', function(err) {
 		console.error(err.message);
 	});
