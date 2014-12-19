@@ -63,7 +63,7 @@ gulp.task('default', ['build'], function(neverEnd) {
 		return events.indexOf(file.event) !== -1;
 	}
 
-	plugins.watch(build.srcBase + '**', { base: build.srcBase }, function(files) {
+	plugins.watch(build.srcBase + '**', { base: build.srcBase }, plugins.batch(function(files) {
 		// TODO filter buffers with repeated file paths
 		// TODO optimize
 		var jsFilter = plugins.filter(build.src.js),
@@ -83,7 +83,7 @@ gulp.task('default', ['build'], function(neverEnd) {
 				.pipe(plugins.rimraf()) // TODO FIXME: this seems broken
 		)
 		.pipe(runAfterEnd(runTests));
-	}).on('ready', function() {
+	})).on('ready', function() {
 		plugins.util.log('Watching ' + chalk.magenta(build.srcBase) + ' directory for changes...');
 	}).on('error', function(err) {
 		console.error(err.message);
