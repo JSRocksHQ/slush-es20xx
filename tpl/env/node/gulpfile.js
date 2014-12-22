@@ -97,11 +97,11 @@ gulp.task('default', ['build'], function(neverEnd) {
 		var existingFiles = files.pipe(existsFilter());
 
 		return mergeStream(
-			existingFiles.pipe(handleJs()),
-			existingFiles.pipe(handleCopy()),
-			files.pipe(handleDeletion())
-		)
-		.pipe(runAfterEnd(runTests));
+				existingFiles.pipe(handleJs()),
+				existingFiles.pipe(handleCopy()),
+				files.pipe(handleDeletion())
+			)
+			.pipe(runAfterEnd(runTests));
 	}, function(err) {
 		// [TEMP] makeshift error reporting for gulp-jscs until gulp-jscs implements proper reporters
 		console.error(err.message);
