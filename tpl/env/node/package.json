@@ -60,10 +60,11 @@
     "jshint-stylish": "^1.0.0",
     "lazypipe": "^0.2.2",
     "load-grunt-tasks": "^1.0.0",
-    "lodash": "^2.4.1",
     "merge-stream": "^0.1.6",
+    "reversepoint": "^0.2.1",
     "rimraf": "^2.2.8",
     "should": "^4.4.1",
-    "through": "^2.3.6"
+    "through": "^2.3.6",
+    "unique-stream": "^1.0.0"
   }
 }

@@ -3,10 +3,11 @@
 var path = require('path'),
 	gulp = require('gulp'),
 	plugins = require('gulp-load-plugins')(),
-	_ = require('lodash'),
 	rimraf = require('rimraf'),
 	through = require('through'),
 	mergeStream = require('merge-stream'),
+	reverseStream = require('reversepoint'),
+	uniqueStream = require('unique-stream'),
 	lazypipe = require('lazypipe'),
 	chalk = require('chalk'),
 	build = require('./build'),
@@ -60,38 +61,29 @@ gulp.task('build', function() {
 // `neverEnd` receives a task conclusion callback which is never called as to signal that this watch task should never end.
 // We don't return gulp-watch's endless stream as it would fail the task in the first stream error.
 gulp.task('default', ['build'], function(neverEnd) {
-	// TODO move uniqueFilter to gulp-batch https://github.com/floatdrop/gulp-batch/issues/13
+	// the odd indentation here is to better illustrate the stream branching/forking flow
 	var uniqueFilter = lazypipe()
-			.pipe(function() {
-				var files = [];
-				return through(function(file) {
-					var idx = _.findIndex(files, { path: file.path });
-					files[~idx ? idx : files.length] = file;
-				}, function() {
-					files.forEach(this.queue, this);
-					this.queue(null);
-				});
-			}),
+			.pipe(reverseStream)
+			.pipe(uniqueStream, 'path'),
 
-		// the odd indentation here is to better illustrate the stream branching/forking flow
-		existsFilter = lazypipe()
-			.pipe(plugins.filter, filterEvent.bind(null, ['changed', 'added'])),
+			existsFilter = lazypipe()
+				.pipe(plugins.filter, filterEvent.bind(null, ['changed', 'added'])),
 
-			handleJs = lazypipe()
-				.pipe(plugins.filter, build.src.js)
-				.pipe(jsPipe),
+				handleJs = lazypipe()
+					.pipe(plugins.filter, build.src.js)
+					.pipe(jsPipe),
 
-			handleCopy = lazypipe()
-				.pipe(plugins.filter, copySrc)
-				.pipe(writePipe),
+				handleCopy = lazypipe()
+					.pipe(plugins.filter, copySrc)
+					.pipe(writePipe),
 
-		handleDeletion = lazypipe()
-			.pipe(plugins.filter, filterEvent.bind(null, ['deleted']))
-			.pipe(plugins.rename, function(filePath) {
-				// we can't change/remove the filePath's `base`, so cd out of it in the dirname
-				filePath.dirname = path.join(path.relative(build.srcBase, '.'), build.distBase, filePath.dirname);
-			})
-			.pipe(plugins.rimraf);
+			handleDeletion = lazypipe()
+				.pipe(plugins.filter, filterEvent.bind(null, ['deleted']))
+				.pipe(plugins.rename, function(filePath) {
+					// we can't change/remove the filePath's `base`, so cd out of it in the dirname
+					filePath.dirname = path.join(path.relative(build.srcBase, '.'), build.distBase, filePath.dirname);
+				})
+				.pipe(plugins.rimraf);
 
 	function filterEvent(events, file) {
 		return ~events.indexOf(file.event);
