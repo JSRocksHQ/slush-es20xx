@@ -9,7 +9,7 @@ var path = require('path'),
 	mergeStream = require('merge-stream'),
 	lazypipe = require('lazypipe'),
 	chalk = require('chalk'),
-	build = require('./build.json'),
+	build = require('./build'),
 	copySrc = ['**'].concat(negateGlobs(build.src.js)),
 	writePipe = lazypipe()
 		.pipe(gulp.dest, build.distBase),
@@ -17,12 +17,12 @@ var path = require('path'),
 		.pipe(plugins.jshint)
 		.pipe(plugins.jshint.reporter, 'jshint-stylish')
 		.pipe(plugins.jshint.reporter, 'fail')
-		.pipe(plugins.jscs, { configPath: '.jscsrc', esnext: true })
-		.pipe(plugins['6to5']/*, { blacklist: ['generators'] }*/)
+		.pipe(plugins.jscs, build.config.jscs)
+		.pipe(plugins['6to5'], build.config['6to5'])
 		.pipe(writePipe),
 	runTests = lazypipe()
 		.pipe(gulp.src, build.distBase + 'test/*.js', { read: false })
-		.pipe(plugins.mocha/*, { bail: true, timeout: 5000 }*/);
+		.pipe(plugins.mocha, build.config.mocha);
 
 function negateGlobs(globs) {
 	return globs.map(function(glob) {
