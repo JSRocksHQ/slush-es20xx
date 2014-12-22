@@ -69,7 +69,7 @@ gulp.task('default', ['build'], function(neverEnd) {
 		handleDeletion = lazypipe()
 			.pipe(plugins.filter, filterEvent.bind(null, ['deleted']))
 			.pipe(plugins.rename, function(filePath) {
-				// we can't change/remove filePath's `base`, so cd out of it in the dirname
+				// we can't change/remove the filePath's `base`, so cd out of it in the dirname
 				filePath.dirname = path.join(path.relative(build.srcBase, '.'), build.distBase, filePath.dirname);
 			})
 			.pipe(plugins.rimraf),
@@ -101,9 +101,10 @@ gulp.task('default', ['build'], function(neverEnd) {
 			files.pipe(handleDeletion())
 		)
 		.pipe(runAfterEnd(runTests));
+	}, function(err) {
+		// makeshift error reporting for gulp-jscs until gulp-jscs implements proper reporters
+		console.error(err.message);
 	})).on('ready', function() {
 		plugins.util.log('Watching ' + chalk.magenta(build.srcBase) + ' directory for changes...');
-	}).on('error', function(err) {
-		console.error(err.message);
 	});
 });
