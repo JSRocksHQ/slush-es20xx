@@ -1,5 +1,3 @@
-# IN DEVELOPMENT - NOT READY FOR USE YET
-
 # [slush](https://github.com/slushjs/slush)-es6
 [![npm version](http://img.shields.io/npm/v/slush-es6.svg)](https://npmjs.org/package/slush-es6)
 [![Build Status](http://img.shields.io/travis/es6rocks/slush-es6.svg)](https://travis-ci.org/es6rocks/slush-es6)
@@ -13,7 +11,7 @@ ECMAScript.next projects generator.
 First off, install [Slush](https://github.com/slushjs/slush). Then:
 
 ```
-npm install -g slush-es6
+npm install -g slush-es6@1.0.0-alpha
 ```
 
 # How to use
