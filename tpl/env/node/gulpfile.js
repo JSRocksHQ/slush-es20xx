@@ -64,7 +64,8 @@ gulp.task('build', function() {
 // `neverEnd` receives a task conclusion callback which is never called as to signal that this watch task should never end.
 // We don't return gulp-watch's endless stream as it would fail the task in the first stream error.
 gulp.task('default', ['build'], function(neverEnd) {
-	// the odd indentation here is to better illustrate the stream branching/forking flow
+	// The odd indentation here is to better illustrate the stream branching/forking flow.
+	// Diagram reference: https://github.com/es6rocks/slush-es6/issues/5#issue-52701608
 	var uniqueFilter = lazypipe()
 			.pipe(reverseStream)
 			.pipe(uniqueStream, 'path'),
