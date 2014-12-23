@@ -30,23 +30,23 @@ Then `cd` to the project root and run `npm run dev`. You're all set, happy hacki
 
 ## npm scripts
 
-- `npm run dev`: this is an alias for running `grunt`'s default task. The advantage of the `npm run dev` command over `grunt` is that the former does not require a global `grunt-cli` installed.
+- `npm run dev`: this is an alias for running `gulp`'s default task. The advantage of the `npm run dev` command over `gulp` is that the former does not require a global `gulp` installed.
 
-## Grunt tasks
+## gulp tasks
 
-- `grunt` (default): executes the `build`, `test` and `watch` tasks.
-- `grunt build`: this task will build the `dist` directory based on the `src` directory's contents. More specifically, it will transpile all of the `src` directory's `.js` files and copy over all other files to `dist`, keeping the same directory structure.
-- `grunt test`: runs JSHint, JSCS and Mocha tests.
-- `grunt watch`: watches the `src` directory for changes, incrementally builds `dist` and runs the corresponding tests.
+- `gulp` (default): executes the `build` task, if successful then enters watch mode to generate incremental builds.
+- `gulp build`: this task will build the `dist` directory based on the `src` directory's contents. This includes linting `.js` files (JSHint, JSCS), transpiling them, copying over non-js files and running Mocha unit tests.
+
+## build configs
+
+Build paths and plugin settings can be customized by editing the chosen environment template's `build.js` file.
 
 # Developing
 
 Want to help developing slush-es6? Awesome! Here are the basic instructions to get you started:
 
+1. Install [Slush](https://github.com/slushjs/slush) if you haven't yet;
 1. Fork this repository and clone it locally;
-- `cd` to your repository root and install the slush-es6 generator from your local repository by running `npm link`;
-- Create a test directory somewhere else, `cd` to it and run `slush es6` to execute this generator;
-- Edit the source code in your repository and then test the changes by running `slush es6` in a test directory. Repeat until you get the desired result;
-- Commit your changes to a new feature/bugfix branch, push them to your fork and open a PR in this repository. See [GitHub Flow](https://guides.github.com/introduction/flow/index.html) if you are not used to it yet. `=]`
-
-**Note:** you must have [Slush](https://github.com/slushjs/slush) installed in order to execute slush generators.
+1. `cd` to your repository root and install the slush-es6 generator from your local repository by running `npm link`;
+1. Edit the source code in your repository and then test the changes by running `slush es6` in a test directory. Repeat until you get the desired result;
+1. Commit your changes to a new feature/bugfix branch, push them to your fork and open a PR in this repository. See [GitHub Flow](https://guides.github.com/introduction/flow/index.html) if you are not used to it yet. `=]`

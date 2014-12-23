@@ -24,10 +24,9 @@
     "LICENSE"
   ],
   "scripts": {
-    "dev": "grunt",
-    "dev-gulp": "gulp",
-    "prepublish": "npm i grunt-6to5 && npm test",
-    "test": "grunt build"
+    "dev": "gulp",
+    "prepublish": "npm i gulp-6to5 && npm test",
+    "test": "gulp build"
   },
   "author": {
     "name": <%= JSON.stringify(authorName) %>,
@@ -36,15 +35,6 @@
   "license": <%= JSON.stringify(license) %>,
   "devDependencies": {
     "chalk": "^0.5.1",
-    "grunt": "^0.4.5",
-    "grunt-6to5": "^1.0.1",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-copy": "^0.7.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-jscs": "^0.8.1",
-    "grunt-mocha-test": "^0.12.2",
     "gulp": "^3.8.10",
     "gulp-6to5": "^1.0.2",
     "gulp-batch": "^1.0.4",
@@ -59,7 +49,6 @@
     "gulp-watch": "^3.0.0",
     "jshint-stylish": "^1.0.0",
     "lazypipe": "^0.2.2",
-    "load-grunt-tasks": "^1.0.0",
     "merge-stream": "^0.1.6",
     "reversepoint": "^0.2.1",
     "rimraf": "^2.2.8",
