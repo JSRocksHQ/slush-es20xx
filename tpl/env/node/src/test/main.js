@@ -11,6 +11,10 @@ describe('Skeleton', function() {
     it('should support ES6 in the unit tests too', function() {
         let foo = 'bar';
         foo.should.equal('bar');
+
+        for (let x of ['ok']) {
+            x.should.equal('ok');
+        }
     });
 
     it('should copy non-js files to dist', function() {
