@@ -11,7 +11,7 @@ ECMAScript.next projects generator.
 First off, install [Slush](https://github.com/slushjs/slush). Then:
 
 ```
-npm install -g slush-es6@1.0.0-alpha
+npm install -g slush-es6@alpha
 ```
 
 # How to use
