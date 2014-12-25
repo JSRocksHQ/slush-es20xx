@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs'),
+	path = require('path'),
 	gulp = require('gulp'),
 	install = require('gulp-install'),
 	conflict = require('gulp-conflict'),
@@ -20,8 +21,8 @@ gulp.task('default', function(done) {
 			new inquirer.Separator('(more environments coming soon)')
 			// { value: 'browser', name: 'Browser' }
 		]},
-		{ when: _.createCallback({ env: 'node' }), name: 'pkgName', message: 'Package name:', default: 'my-es6-package' },
-		{ when: _.createCallback({ env: 'node' }), name: 'pkgDescription', message: 'Package description:', default: 'Hello ES6 World!' },
+		{ when: _.createCallback({ env: 'node' }), name: 'pkgName', message: 'Package name:', default: path.basename(process.cwd()) },
+		{ when: _.createCallback({ env: 'node' }), name: 'pkgDescription', message: 'Package description:', default: 'My awesome ES6 package' },
 		{ when: _.createCallback({ env: 'node' }), name: 'keywords', message: 'Keywords (space-separated):', default: 'es6 hello-world' },
 		{ when: _.createCallback({ env: 'node' }), name: 'installFlags', default: '--save', message: function(answers) {
 			return 'Recommended flag(s) for ' + chalk.bgGreen(' npm install ' + answers.pkgName + ' ');
