@@ -45,10 +45,10 @@
   "license": "WTFPL",
   "dependencies": {
     "chalk": "^0.5.1",
-    "gulp": "^3.8.9",
-    "gulp-conflict": "^0.2.0",
+    "gulp": "^3.8.10",
+    "gulp-conflict": "^0.3.0",
     "gulp-install": "^0.2.0",
-    "gulp-template": "^1.1.1",
+    "gulp-template": "^2.0.0",
     "inquirer": "^0.8.0",
     "lodash": "^2.4.1"
   },
