@@ -34,7 +34,7 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "dependencies": {
-    "gulp-6to5": "^1.0.2"
+    "gulp-6to5": "^2.0.0"
   },
   "devDependencies": {
     "chalk": "^0.5.1",
