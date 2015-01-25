@@ -2,7 +2,7 @@
   "name": <%= JSON.stringify(pkgName) %>,
   "version": "1.0.0",
   "description": <%= JSON.stringify(pkgDescription) %>,
-  "main": "dist/index.js",
+  "main": "index.js",
   "keywords": <%=
     // extra array wrapper to reach the desired indentation level, slice its leading "[\n  " (leading whitespace striped for OTBS) and trailing "\n]"
     JSON.stringify([keywords], null, 2).slice(4, -2)

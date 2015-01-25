@@ -14,4 +14,4 @@ require('core-js/shim');
 require('regenerator/runtime');
 
 // Run the package transpiled's code and re-export its exports
-module.exports = require('dist/index.js');
+module.exports = require('./dist/index.js');
