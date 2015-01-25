@@ -1,5 +1,3 @@
-require('gulp-6to5/node_modules/6to5/polyfill');
-
 import world from './lib/world';
 
 // jscs:disable disallowSpacesInsideParentheses
