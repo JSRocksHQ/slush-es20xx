@@ -28,7 +28,7 @@ Then `cd` to the project root and run `npm run dev`. You're all set, happy hacki
 
 ## npm scripts
 
-- `npm run dev`: this command runs gulp's default task with the Node.js `--harmony` flag enabled and does not require a global `gulp` package installed.
+- `npm run dev`: an alias for gulp's default task which does not require `gulp` globally installed.
 
 ## gulp tasks
 
