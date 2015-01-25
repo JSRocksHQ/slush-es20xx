@@ -35,7 +35,7 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "dependencies": {
-    "core-js": "^0.4.6",
+    "core-js": "^0.4.8",
     "regenerator": "^0.8.9"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-src-ordered-globs": "^1.0.2",
     "gulp-util": "^3.0.1",
-    "gulp-watch": "^3.0.0",
+    "gulp-watch": "^4.1.0",
     "jshint-stylish": "^1.0.0",
     "lazypipe": "^0.2.2",
     "merge-stream": "^0.1.6",
@@ -60,7 +60,7 @@
     "rimraf": "^2.2.8",
     "should": "^4.4.1",
     "through": "^2.3.6",
-    "unique-stream": "^1.0.0",
+    "unique-stream": "^2.0.2",
     "vinyl-paths": "^1.0.0"
   }
 }
