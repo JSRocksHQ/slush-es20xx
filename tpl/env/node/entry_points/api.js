@@ -1,4 +1,4 @@
 'use strict';
 
-require('./polyfill');
+require('./lib/polyfill');
 module.exports = require('../dist/index');
