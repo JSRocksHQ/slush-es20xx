@@ -36,6 +36,7 @@
     "node": ">= 0.10"
   },
   "scripts": {
+    "install": "node install.js",
     "test": "mocha"
   },
   "author": {
@@ -45,6 +46,7 @@
   "license": "WTFPL",
   "dependencies": {
     "chalk": "^0.5.1",
+    "glob": "^4.3.5",
     "gulp": "^3.8.10",
     "gulp-conflict": "^0.3.0",
     "gulp-install": "^0.2.0",
