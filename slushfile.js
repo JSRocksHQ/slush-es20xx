@@ -21,16 +21,16 @@ gulp.task('default', function(done) {
 			new inquirer.Separator('(more environments coming soon)')
 			// { value: 'browser', name: 'Browser' }
 		]},
-		{ when: _.createCallback({ env: 'node' }), name: 'pkgName', message: 'Package name:', default: path.basename(process.cwd()) },
-		{ when: _.createCallback({ env: 'node' }), name: 'pkgDescription', message: 'Package description:', default: 'My awesome ES6 package' },
-		{ when: _.createCallback({ env: 'node' }), name: 'keywords', message: 'Keywords (space-separated):', default: 'es6 hello-world' },
-		{ when: _.createCallback({ env: 'node' }), name: 'installFlags', default: '--save', message: function(answers) {
+		{ when: _.callback({ env: 'node' }), name: 'pkgName', message: 'Package name:', default: path.basename(process.cwd()) },
+		{ when: _.callback({ env: 'node' }), name: 'pkgDescription', message: 'Package description:', default: 'My awesome ES6 package' },
+		{ when: _.callback({ env: 'node' }), name: 'keywords', message: 'Keywords (space-separated):', default: 'es6 hello-world' },
+		{ when: _.callback({ env: 'node' }), name: 'installFlags', default: '--save', message: function(answers) {
 			return 'Recommended flag(s) for ' + chalk.bgGreen(' npm install ' + answers.pkgName + ' ');
 		}},
-		{ when: _.createCallback({ env: 'node' }), name: 'enginesNode', message: 'Compatible Node.js versions:', default: '>= 0.10' },
-		{ when: _.createCallback({ env: 'node' }), name: 'travisNode', message: 'Node.js versions to use in Travis CI (space-separated):', default: '0.10 0.11' },
-		{ when: _.createCallback({ env: 'node' }), name: 'authorName', message: 'Author name:', default: 'Ult Combo' },
-		{ when: _.createCallback({ env: 'node' }), name: 'authorEmail', message: 'Author email:', default: 'ultcombo@gmail.com' },
+		{ when: _.callback({ env: 'node' }), name: 'enginesNode', message: 'Compatible Node.js versions:', default: '>= 0.10' },
+		{ when: _.callback({ env: 'node' }), name: 'travisNode', message: 'Node.js versions to use in Travis CI (space-separated):', default: '0.10 0.11' },
+		{ when: _.callback({ env: 'node' }), name: 'authorName', message: 'Author name:', default: 'Ult Combo' },
+		{ when: _.callback({ env: 'node' }), name: 'authorEmail', message: 'Author email:', default: 'ultcombo@gmail.com' },
 		{ name: 'ghUser', message: 'GitHub repository owner username:', default: 'UltCombo' },
 		{ name: 'ghRepo', message: 'GitHub repository name:', default: function(answers) { return answers.pkgName; } },
 		{ name: 'homepage', message: 'Project homepage:', default: function(answers) { return 'https://github.com/' + answers.ghUser + '/' + answers.ghRepo; } },
