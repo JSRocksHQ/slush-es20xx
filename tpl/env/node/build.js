@@ -8,7 +8,7 @@ module.exports = {
 	distBase: 'dist/',
 	config: {
 		jscs: { configPath: '.jscsrc', esnext: true },
-		'6to5': { /*experimental: true*/ },
+		'6to5': { optional: ['selfContained']/*, experimental: true*/ },
 		mocha: { /*bail: true, timeout: 5000*/ }
 	}
 };

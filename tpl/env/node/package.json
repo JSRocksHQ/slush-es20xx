@@ -35,8 +35,7 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "dependencies": {
-    "core-js": "^0.4.10",
-    "regenerator": "^0.8.9"
+    "6to5-runtime": "^3.3.2"
   },
   "devDependencies": {
     "chalk": "^0.5.1",
