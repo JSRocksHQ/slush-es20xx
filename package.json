@@ -1,5 +1,5 @@
 {
-  "name": "slush-es6",
+  "name": "slush-es20xx",
   "version": "1.0.0-beta.3",
   "description": "ECMAScript.next projects generator.",
   "main": "slushfile.js",
@@ -7,6 +7,8 @@
     "slushgenerator",
     "es6",
     "es7",
+    "es2015",
+    "es2016",
     "es.next",
     "ecmascript.next",
     "js.next",
@@ -26,12 +28,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/es6rocks/slush-es6.git"
+    "url": "https://github.com/es6rocks/slush-es20xx.git"
   },
   "bugs": {
-    "url": "https://github.com/es6rocks/slush-es6/issues"
+    "url": "https://github.com/es6rocks/slush-es20xx/issues"
   },
-  "homepage": "https://github.com/es6rocks/slush-es6",
+  "homepage": "https://github.com/es6rocks/slush-es20xx",
   "engines": {
     "node": ">= 0.10"
   },
