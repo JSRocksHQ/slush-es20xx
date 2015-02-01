@@ -22,8 +22,8 @@ gulp.task('default', function(done) {
 			// { value: 'browser', name: 'Browser' }
 		]},
 		{ when: _.callback({ env: 'node' }), name: 'pkgName', message: 'Package name:', default: path.basename(process.cwd()) },
-		{ when: _.callback({ env: 'node' }), name: 'pkgDescription', message: 'Package description:', default: 'My awesome ES6 package' },
-		{ when: _.callback({ env: 'node' }), name: 'keywords', message: 'Keywords (space-separated):', default: 'es6 hello-world' },
+		{ when: _.callback({ env: 'node' }), name: 'pkgDescription', message: 'Package description:', default: 'My awesome ES.next package' },
+		{ when: _.callback({ env: 'node' }), name: 'keywords', message: 'Keywords (space-separated):', default: 'es20xx hello-world' },
 		{ when: _.callback({ env: 'node' }), name: 'installFlags', default: '--save', message: function(answers) {
 			return 'Recommended flag(s) for ' + chalk.bgGreen(' npm install ' + answers.pkgName + ' ');
 		}},
@@ -49,7 +49,7 @@ gulp.task('default', function(done) {
 			__dirname + '/tpl/env/' + answers.env + '/**',
 			__dirname + '/tpl/licenses/' + answers.license + '/**'
 		], { dot: true })
-			// Setting the interpolate option in order to not conflict with ES6 template strings
+			// Set the interpolate option in order to not conflict with ES2015 template strings
 			.pipe(template(answers, { interpolate: /<%=([\s\S]+?)%>/g }))
 			.pipe(conflict('.'))
 			.pipe(gulp.dest('.'))
