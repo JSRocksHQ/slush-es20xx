@@ -6,6 +6,10 @@
 
 ECMAScript.next projects generator.
 
+# What makes slush-es20xx better than other ES.next workflows?
+
+Basically, an incremental build strategy that *just works*. Well, actually, it is [pretty complicated](https://github.com/es6rocks/slush-es20xx/issues/5#issue-52701608) but don't worry, we take care of it for you! :smile:
+
 # Install
 
 ```
