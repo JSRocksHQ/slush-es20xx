@@ -21,7 +21,7 @@ gulp.task('default', function(done) {
 			new inquirer.Separator('(more environments coming soon)')
 			// { value: 'browser', name: 'Browser' }
 		]},
-		{ when: _.callback({ env: 'node' }), name: 'pkgName', message: 'Package name:', default: path.basename(process.cwd()) },
+		{ when: _.callback({ env: 'node' }), name: 'pkgName', message: 'Package name:', default: _.kebabCase(path.basename(process.cwd())) },
 		{ when: _.callback({ env: 'node' }), name: 'pkgDescription', message: 'Package description:', default: 'My awesome ES.next package' },
 		{ when: _.callback({ env: 'node' }), name: 'keywords', message: 'Keywords (space-separated):', default: 'es20xx hello-world' },
 		{ when: _.callback({ env: 'node' }), name: 'installFlags', default: '--save', message: function(answers) {
