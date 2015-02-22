@@ -13,6 +13,7 @@
     "ecmascript.next",
     "js.next",
     "javascript.next",
+    "babel",
     "6to5",
     "traceur",
     "modular",
