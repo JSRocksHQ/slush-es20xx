@@ -1,6 +1,6 @@
 'use strict';
 
-// [TEMP] workaround gulp-jscs Windows issue - https://github.com/es6rocks/slush-es6/issues/4
+// [TEMP] workaround gulp-jscs Windows issue - https://github.com/es6rocks/slush-es20xx/issues/4
 if (require('os').platform() === 'win32') process.argv.push('--no-color');
 
 var path = require('path'),
@@ -55,7 +55,7 @@ gulp.task('build', function() {
 // We don't return gulp-watch's endless stream as it would fail the task in the first stream error.
 gulp.task('default', ['build'], function(neverEnd) {
 	// The odd indentation here is to better illustrate the stream branching/forking flow.
-	// Diagram reference: https://github.com/es6rocks/slush-es6/issues/5#issue-52701608
+	// Diagram reference: https://github.com/es6rocks/slush-es20xx/issues/5#issue-52701608
 	var uniqueFilter = lazypipe()
 			.pipe(reverseStream)
 			.pipe(uniqueStream, 'path'),
