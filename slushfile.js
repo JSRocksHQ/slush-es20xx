@@ -28,7 +28,7 @@ gulp.task('default', function(done) {
 			return 'Recommended flag(s) for ' + chalk.bgGreen(' npm install ' + answers.pkgName + ' ');
 		}},
 		{ when: _.callback({ env: 'node' }), name: 'enginesNode', message: 'Compatible Node.js versions:', default: '>= 0.10' },
-		{ when: _.callback({ env: 'node' }), name: 'travisNode', message: 'Node.js versions to use in Travis CI (space-separated):', default: '0.10 0.11' },
+		{ when: _.callback({ env: 'node' }), name: 'travisNode', message: 'Node.js versions to use in Travis CI (space-separated):', default: '0.12 iojs' },
 		{ when: _.callback({ env: 'node' }), name: 'authorName', message: 'Author name:', default: 'Ult Combo' },
 		{ when: _.callback({ env: 'node' }), name: 'authorEmail', message: 'Author email:', default: 'ultcombo@gmail.com' },
 		{ name: 'ghUser', message: 'GitHub repository owner username:', default: 'UltCombo' },
