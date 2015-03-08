@@ -4,7 +4,7 @@
 [![Dependency Status](http://img.shields.io/david/es6rocks/slush-es20xx.svg)](https://david-dm.org/es6rocks/slush-es20xx)
 [![devDependency Status](http://img.shields.io/david/dev/es6rocks/slush-es20xx.svg)](https://david-dm.org/es6rocks/slush-es20xx#info=devDependencies)
 
-ECMAScript.next projects generator.
+Full ECMAScript.next development and deployment workflow.
 
 # What makes slush-es20xx better than other ES.next workflows?
 
