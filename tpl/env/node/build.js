@@ -7,7 +7,6 @@ module.exports = {
 	},
 	distBase: 'dist/',
 	config: {
-		jscs: { configPath: '.jscsrc', esnext: true },
 		babel: { optional: ['runtime']/*, experimental: true*/ },
 		mocha: { /*bail: true, timeout: 5000*/ }
 	}

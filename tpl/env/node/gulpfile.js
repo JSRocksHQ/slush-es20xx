@@ -1,8 +1,5 @@
 'use strict';
 
-// [TEMP] workaround gulp-jscs Windows issue - https://github.com/es6rocks/slush-es20xx/issues/4
-if (require('os').platform() === 'win32') process.argv.push('--no-color');
-
 var path = require('path'),
 	gulp = require('gulp'),
 	plugins = require('gulp-load-plugins')(),
@@ -20,10 +17,9 @@ var path = require('path'),
 	writePipe = lazypipe()
 		.pipe(gulp.dest, build.distBase),
 	jsPipe = lazypipe()
-		.pipe(plugins.jshint)
-		.pipe(plugins.jshint.reporter, 'jshint-stylish')
-		.pipe(plugins.jshint.reporter, 'fail')
-		.pipe(plugins.jscs, build.config.jscs)
+		.pipe(plugins.eslint)
+		.pipe(plugins.eslint.format)
+		.pipe(plugins.eslint.failAfterError)
 		.pipe(plugins.babel, build.config.babel)
 		.pipe(writePipe),
 	runTests = lazypipe()
@@ -94,7 +90,6 @@ gulp.task('default', ['build'], function(neverEnd) {
 			)
 			.pipe(runAfterEnd(runTests));
 	}, function(err) {
-		// [TEMP] makeshift error reporting for gulp-jscs until gulp-jscs implements proper reporters
 		console.error(err.message);
 	})).on('ready', function() {
 		plugins.util.log('Watching ' + chalk.magenta(build.srcBase) + ' directory for changes...');

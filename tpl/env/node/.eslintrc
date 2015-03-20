@@ -1,0 +1,59 @@
+{
+	"parser": "babel-eslint",
+	"env": {
+		"node": true
+	},
+	"rules": {
+		// Possible Errors
+		"comma-dangle": [2, "always-multiline"],
+		"no-cond-assign": 0,
+		"no-console": 0,
+		"no-extra-parens": 2,
+		"no-inner-declarations": 0, // Valid per ES 2015
+
+		// Best Practices
+		"consistent-return": 0,
+		"curly": [2, "multi-line"], // https://github.com/eslint/eslint/issues/2053
+		"eqeqeq": [2, "allow-null"],
+		"alert": 0,
+		"no-else-return": 2,
+		// "no-lone-blocks": 0, // TODO check if there are real, valid use cases for this in ES 2015+
+		"no-throw-literal": 2,
+		"no-void": 2,
+		"wrap-iife": [2, "inside"], // Arrow Functions don't support "outside" wrapping
+
+		// Strict Mode
+		"strict": [2, "never"], // ES Modules are implicitly strict
+
+		// Variables
+
+		// Node.js
+
+		// Stylistic Issues
+		"indent": [2, "tab"],
+		"brace-style": [2, "1tbs", { "allowSingleLine": true }],
+		"comma-style": [2, "last"],
+		"consistent-this": [2, "that"], // Arrow Functions are preferred, unless it is necessary to access the `this` binding from both lexical environments
+		"func-style": [2, "declaration"],
+		"no-lonely-if": 2,
+		"no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+		"no-multiple-empty-lines": [2, { "max": 2 }],
+		"no-underscore-dangle": 0,
+		"operator-assignment": [2, "always"],
+		"quote-props": [2, "as-needed"],
+		"quotes": [2, "single"/*, "avoid-escape"*/],
+		"space-after-keywords": [2, "always"],
+		"space-before-blocks": [2, "always"],
+		"space-before-function-parentheses": [2, "never"],
+		"space-in-brackets": [2, "never"], // https://github.com/eslint/eslint/issues/1576
+		"space-in-parens": [2, "never"],
+		"spaced-line-comment": [2, "always", { "exceptions": ["/"] }],
+
+		// ECMAScript 2015
+		"no-var": 2,
+		"generator-star-spacing": [2, "before"],
+
+		// Legacy
+		"max-len": [2, 100, 4],
+	}
+}
