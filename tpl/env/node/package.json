@@ -35,7 +35,7 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "dependencies": {
-    "babel-runtime": "^4.7.3"
+    "babel-runtime": "^4.7.16"
   },
   "devDependencies": {
     "babel-eslint": "^2.0.2",
@@ -46,17 +46,17 @@
     "gulp-batch": "^1.0.5",
     "gulp-eslint": "^0.7.0",
     "gulp-filter": "^2.0.2",
-    "gulp-load-plugins": "^0.8.0",
+    "gulp-load-plugins": "^0.9.0",
     "gulp-mocha": "^2.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-src-ordered-globs": "^1.0.3",
     "gulp-util": "^3.0.3",
-    "gulp-watch": "^4.1.1",
+    "gulp-watch": "^4.2.0",
     "lazypipe": "^0.2.2",
     "merge-stream": "^0.1.7",
     "reversepoint": "^0.2.1",
-    "rimraf": "^2.3.1",
-    "should": "^5.1.0",
+    "rimraf": "^2.3.2",
+    "should": "^5.2.0",
     "through": "^2.3.6",
     "unique-stream": "^2.0.2",
     "vinyl-paths": "^1.0.0"
