@@ -9,89 +9,99 @@ var path = require('path'),
 	mergeStream = require('merge-stream'),
 	reverseStream = require('reversepoint'),
 	uniqueStream = require('unique-stream'),
-	lazypipe = require('lazypipe'),
 	globManip = require('glob-manipulate'),
 	chalk = require('chalk'),
 	build = require('./build'),
-	copySrc = ['**'].concat(globManip.negate(build.src.js)),
-	writePipe = lazypipe()
-		.pipe(gulp.dest, build.distBase),
-	jsPipe = lazypipe()
-		.pipe(plugins.eslint)
-		.pipe(plugins.eslint.format)
-		.pipe(plugins.eslint.failAfterError)
-		.pipe(plugins.babel, build.config.babel)
-		.pipe(writePipe),
-	runTests = lazypipe()
-		.pipe(gulp.src, build.distBase + 'test/*.js', { read: false })
-		.pipe(plugins.mocha, build.config.mocha);
+	copySrc = ['**'].concat(globManip.negate(build.src.js));
 
-function runAfterEnd(cb) {
-	// This is basically a passThrough stream for the callback's stream.
-	// It waits until all data is finished being piped into it and discards this data,
-	// then passes through the data from the stream provided by the callback.
+function runTests() {
+	// Wait until all data is finished being piped into the stream (discarding this data),
+	// then pass through the data from the mocha stream.
 	return through(function() {}, function() {
-		var cbStream = cb();
-		['data', 'end'/*, 'error'*/].forEach(function(event) {
-			cbStream.on(event, this.emit.bind(this, event));
+		var mochaStream = gulp.src(build.distBase + 'test/*.js', { read: false })
+			.pipe(plugins.mocha(build.config.mocha));
+		['data', 'end', 'error'].forEach(function(event) {
+			mochaStream.on(event, this.emit.bind(this, event));
 		}, this);
 	});
 }
 
-gulp.task('build', function() {
-	rimraf.sync(build.distBase);
-	return mergeStream(
-			plugins.srcOrderedGlobs(globManip.prefix(build.src.js, build.srcBase), { base: build.srcBase }).pipe(jsPipe()),
-			plugins.srcOrderedGlobs(globManip.prefix(copySrc, build.srcBase), { base: build.srcBase }).pipe(writePipe())
-		)
-		.pipe(runAfterEnd(runTests));
+gulp.task('clean', function(cb) {
+	rimraf(build.distBase, cb);
 });
 
-// `neverEnd` receives a task conclusion callback which is never called as to signal that this watch task should never end.
-// We don't return gulp-watch's endless stream as it would fail the task in the first stream error.
-gulp.task('default', ['build'], function(neverEnd) {
-	// The odd indentation here is to better illustrate the stream branching/forking flow.
+gulp.task('build', ['clean'], function() {
+	return mergeStream(
+		plugins.srcOrderedGlobs(globManip.prefix(build.src.js, build.srcBase), { base: build.srcBase })
+			.pipe(plugins.eslint())
+			.pipe(plugins.eslint.format())
+			.pipe(plugins.eslint.failAfterError())
+			.pipe(plugins.babel(build.config.babel))
+			.on('error', function(err) {
+				// workaround Windows command prompt color issue and hide call stack
+				console.log(err.message);
+				process.exit(1);
+			}),
+		plugins.srcOrderedGlobs(globManip.prefix(copySrc, build.srcBase), { base: build.srcBase })
+	)
+		.pipe(gulp.dest(build.distBase))
+		.pipe(runTests());
+});
+
+gulp.task('default', ['clean'], function() {
+	var srcToDistRelativePath = path.relative(build.srcBase, build.distBase);
+
 	// Diagram reference: https://github.com/es6rocks/slush-es20xx/issues/5#issue-52701608
-	var uniqueFilter = lazypipe()
-			.pipe(reverseStream)
-			.pipe(uniqueStream, 'path'),
+	return plugins.watch(build.srcBase + '**', { base: build.srcBase, ignoreInitial: false }, plugins.batch(function(files) {
+		// plumber + unique filter
+		files = files
+			.pipe(plugins.plumber(function(err) {
+				// [[TEMP]] workaround until this is merged: https://github.com/babel/gulp-babel/pull/22
+				if (err.plugin === 'gulp-babel') err.showProperties = false;
 
-			existsFilter = lazypipe()
-				.pipe(plugins.filter, filterEvent.bind(null, ['change', 'add'])),
+				plugins.util.log(err.toString());
+			}))
+			.pipe(reverseStream())
+			.pipe(uniqueStream('path'));
 
-				handleJs = lazypipe()
-					.pipe(plugins.filter, build.src.js)
-					.pipe(jsPipe),
-
-				handleCopy = lazypipe()
-					.pipe(plugins.filter, copySrc)
-					.pipe(writePipe),
-
-			handleDeletion = lazypipe()
-				.pipe(plugins.filter, filterEvent.bind(null, ['unlink']))
-				.pipe(plugins.rename, function(filePath) {
-					// we can't change/remove the filePath's `base`, so cd out of it in the dirname
-					filePath.dirname = path.join(path.relative(build.srcBase, '.'), build.distBase, filePath.dirname);
-				})
-				.pipe(vinylPaths, rimraf);
-
-	function filterEvent(events, file) {
-		return ~events.indexOf(file.event);
-	}
-
-	plugins.watch(build.srcBase + '**', { base: build.srcBase }, plugins.batch(function(files) {
-		files = files.pipe(uniqueFilter());
-		var existingFiles = files.pipe(existsFilter());
+		var existingFiles = files
+			.pipe(plugins.filter(function(file) {
+				return file.event === 'change' || file.event === 'add';
+			}));
 
 		return mergeStream(
-				existingFiles.pipe(handleJs()),
-				existingFiles.pipe(handleCopy()),
-				files.pipe(handleDeletion())
+				// js pipe
+				existingFiles
+					.pipe(plugins.filter(build.src.js))
+					.pipe(plugins.eslint())
+					.pipe(plugins.eslint.format())
+					.pipe(plugins.babel(build.config.babel))
+					.pipe(gulp.dest(build.distBase)),
+
+				// copy pipe
+				existingFiles
+					.pipe(plugins.filter(copySrc))
+					.pipe(gulp.dest(build.distBase)),
+
+				// deletion pipe
+				files
+					.pipe(plugins.filter(function(file) {
+						return file.event === 'unlink';
+					}))
+					.pipe(plugins.rename(function(filePath) {
+						// we can't change/remove the filePath's `base`, so cd out of it in the dirname
+						filePath.dirname = path.join(srcToDistRelativePath, filePath.dirname);
+					}))
+					.pipe(vinylPaths(rimraf))
 			)
-			.pipe(runAfterEnd(runTests));
+			.pipe(runTests());
 	}, function(err) {
-		console.error(err.message);
+		// TODO remove domain err handler
+		console.log(chalk.red('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!domain err handler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'));
+		plugins.util.log(chalk.red('Detected uncaught error'), err);
 	})).on('ready', function() {
 		plugins.util.log('Watching ' + chalk.magenta(build.srcBase) + ' directory for changes...');
 	});
 });
+
+// TODO https://github.com/sindresorhus/gulp-mocha/pull/87

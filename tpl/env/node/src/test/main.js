@@ -1,4 +1,5 @@
 /*eslint-env mocha */
+/*eslint-disable no-unused-expressions */ // Should.js
 
 import 'should';
 import {x as importedX} from '../..';
