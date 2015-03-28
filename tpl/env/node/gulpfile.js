@@ -127,25 +127,25 @@ gulp.task('default', ['clean'], function(cb) {
 	}
 
 	// TODO move to own package?
-	// Simplified fork of gulp-batch, with removed domains (async-done) and added most recent + unique('path') deduping logic.
+	// Simplified fork of gulp-batch, with removed domains (async-done) and added most recent unique('path') deduping logic.
 	// Added isActive() method which returns whether the callback is currently executing or if there are any batched/queued files waiting for execution.
 	function batch(cb) {
 
 		var batch = [];
-		var holdOn = false;
+		var isRunning = false;
 		var timeout;
 		var delay = 100; // ms
 
 		function setupFlushTimeout() {
-			if (!holdOn && batch.length) {
+			if (!isRunning && batch.length) {
 				timeout = setTimeout(flush, delay);
 			}
 		}
 
 		function flush() {
-			holdOn = true;
+			isRunning = true;
 			cb(streamify(batch), function() {
-				holdOn = false;
+				isRunning = false;
 				setupFlushTimeout();
 			});
 			batch = [];
@@ -164,7 +164,7 @@ gulp.task('default', ['clean'], function(cb) {
 		};
 
 		doBatch.isActive = function() {
-			return !!(holdOn || batch.length);
+			return isRunning || !!batch.length;
 		};
 
 		return doBatch;
