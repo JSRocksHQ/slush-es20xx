@@ -12,7 +12,7 @@ Simply put, an incremental build strategy that *just works*. The internals are a
 
 # Install
 
-Install [Slush](https://github.com/slushjs/slush) and slush-es20xx:
+Install [Slush](https://slushjs.github.io/) and slush-es20xx:
 
 ```
 npm install -g slush slush-es20xx
