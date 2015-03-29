@@ -11,7 +11,7 @@ var copySrc = ['**'].concat(globManip.negate(build.src.js));
 // Run unit tests in complete isolation, see https://github.com/es6rocks/harmonic/issues/122#issuecomment-85333442
 function runTests(cb, opt) {
 	gulp.src(build.distBase + 'test/*.js', { base: build.distBase, read: false })
-		.pipe(plugins.shell('mocha ' + build.config.mocha + ' "<%= file.path %>"', opt))
+		.pipe(plugins.shell('mocha ' + build.config.mocha + ' "<' + '%= file.path %>"', opt)) // avoid conflict with gulp-template
 		.on('end', cb)
 		.resume(); // Not actually necessary (gulp-shell already calls `.resume()`), just to be safe.
 }
