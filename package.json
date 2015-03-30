@@ -54,8 +54,8 @@
     "gulp-conflict": "^0.3.0",
     "gulp-install": "^0.2.0",
     "gulp-template": "^3.0.0",
-    "inquirer": "^0.8.0",
-    "lodash": "^3.5.0"
+    "inquirer": "^0.8.2",
+    "lodash": "^3.6.0"
   },
   "devDependencies": {
     "mocha": "^2.2.1",
