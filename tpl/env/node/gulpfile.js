@@ -112,11 +112,8 @@ gulp.task('default', ['clean'], function(cb) {
 					return file.event === 'unlink';
 				}))
 				.pipe(through2.obj(function(file, enc, cb) {
-					// make sure file path is absolute, see https://github.com/floatdrop/gulp-watch/issues/152
-					var absPath = path.resolve(file.path);
-
-					removeFromFailingList(filesFailingLint, absPath);
-					removeFromFailingList(filesFailingCompile, absPath);
+					removeFromFailingList(filesFailingLint, file.path);
+					removeFromFailingList(filesFailingCompile, file.path);
 					cb(null, file);
 				}))
 				.pipe(plugins.rename(function(filePath) {
@@ -147,7 +144,7 @@ gulp.task('default', ['clean'], function(cb) {
 						);
 					}
 
-					cb(); // must be called before checking batched.isActive()
+					cb(); // must call batch's cb before checking `batched.isActive()`
 					plugins.util.log(
 						chalk.green('Batch completed.')
 						+ (!SIGINTed && !batched.isActive() ? ' Watching ' + chalk.magenta(build.srcBase) + ' directory for changes...' : '')
