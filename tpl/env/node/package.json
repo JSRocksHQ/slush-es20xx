@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "dev": "gulp",
-    "prepublish": "npm install gulp-babel@4 babel-runtime@4 && npm test",
+    "prepublish": "npm install gulp-babel@5 babel-runtime@5 && npm test",
     "test": "gulp build"
   },
   "author": {
@@ -35,23 +35,23 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "dependencies": {
-    "babel-runtime": "^4.7.16"
+    "babel-runtime": "^5.0.8"
   },
   "devDependencies": {
     "babel-eslint": "^2.0.2",
     "chalk": "^1.0.0",
     "glob-manipulate": "^1.1.1",
     "gulp": "^3.8.11",
-    "gulp-babel": "^4.0.1",
+    "gulp-babel": "^5.0.0",
     "gulp-eslint": "^0.8.0",
     "gulp-filter": "^2.0.2",
     "gulp-load-plugins": "^0.9.0",
     "gulp-plumber": "^1.0.0",
-    "gulp-rename": "^1.2.0",
+    "gulp-rename": "^1.2.2",
     "gulp-shell": "^0.4.0",
     "gulp-src-ordered-globs": "^1.0.3",
     "gulp-util": "^3.0.4",
-    "gulp-watch": "^4.2.2",
+    "gulp-watch": "^4.2.3",
     "merge-stream": "^0.1.7",
     "mocha": "^2.2.1",
     "rimraf": "^2.3.2",

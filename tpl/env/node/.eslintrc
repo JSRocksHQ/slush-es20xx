@@ -8,7 +8,7 @@
 		"comma-dangle": [2, "always-multiline"],
 		"no-cond-assign": 0,
 		"no-console": 0,
-		"no-extra-parens": 2,
+		// "no-extra-parens": 2,
 		"no-inner-declarations": 0, // Valid per ES 2015
 
 		// Best Practices
