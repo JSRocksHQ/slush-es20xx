@@ -1,8 +1,8 @@
 # ![slush-es20xx logo](logo.png)
 [![npm version](http://img.shields.io/npm/v/slush-es20xx.svg)](https://npmjs.org/package/slush-es20xx)
-[![Build Status](http://img.shields.io/travis/es6rocks/slush-es20xx.svg)](https://travis-ci.org/es6rocks/slush-es20xx)
-[![Dependency Status](http://img.shields.io/david/es6rocks/slush-es20xx.svg)](https://david-dm.org/es6rocks/slush-es20xx)
-[![devDependency Status](http://img.shields.io/david/dev/es6rocks/slush-es20xx.svg)](https://david-dm.org/es6rocks/slush-es20xx#info=devDependencies)
+[![Build Status](http://img.shields.io/travis/JSRocksHQ/slush-es20xx.svg)](https://travis-ci.org/JSRocksHQ/slush-es20xx)
+[![Dependency Status](http://img.shields.io/david/JSRocksHQ/slush-es20xx.svg)](https://david-dm.org/JSRocksHQ/slush-es20xx)
+[![devDependency Status](http://img.shields.io/david/dev/JSRocksHQ/slush-es20xx.svg)](https://david-dm.org/JSRocksHQ/slush-es20xx#info=devDependencies)
 
 Full ECMAScript.next development and deployment workflow.
 
