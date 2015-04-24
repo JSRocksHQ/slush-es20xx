@@ -6,10 +6,6 @@
 
 Full ECMAScript.next development and deployment workflow.
 
-# What makes slush-es20xx better than other ES.next workflows?
-
-Simply put, an incremental build strategy that *just works*. The internals are actually [pretty complicated](https://github.com/es6rocks/slush-es20xx/issues/5#issue-52701608), but don't worry, we take care of it for you! :smile:
-
 # Install
 
 Install [Slush](https://slushjs.github.io/) and slush-es20xx:
@@ -36,7 +32,7 @@ Then `cd` to the project root and run `npm run dev`. You're all set, happy hacki
 
 ## gulp tasks
 
-- `gulp` (default): executes the `build` task, if successful then enters watch mode to generate incremental builds.
+- `gulp` (default): do a complete build and watch files to generate incremental builds.
 - `gulp build`: this task will build the `dist` directory based on the `src` directory's contents. This includes linting `.js` files (JSHint, JSCS), transpiling them, copying over non-js files and running Mocha unit tests.
 
 ## build configs
