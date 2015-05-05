@@ -1,6 +1,7 @@
 /*eslint-env mocha */
 /*eslint-disable no-unused-expressions */ // Should.js
 
+import 'babel-core/polyfill';
 import 'should';
 import {x as importedX} from '../..';
 
@@ -28,5 +29,9 @@ describe('Skeleton', function() {
 			});
 			done();
 		})();
+	});
+
+	it('should support ES.next built-in prototype methods', function() {
+		[1, 2].includes(1).should.be.true;
 	});
 });

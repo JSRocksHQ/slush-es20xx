@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "dev": "gulp",
-    "prepublish": "npm install gulp-babel@5 babel-runtime@5 && npm test",
+    "prepublish": "npm install babel-core@5 gulp-babel@5 babel-runtime@5 && npm test",
     "test": "gulp build"
   },
   "author": {
@@ -35,7 +35,8 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "dependencies": {
-    "babel-runtime": "^5.1.11"
+    "babel-core": "^5.2.12",
+    "babel-runtime": "^5.2.12"
   },
   "devDependencies": {
     "babel-eslint": "^3.0.1",
