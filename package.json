@@ -1,6 +1,6 @@
 {
   "name": "slush-es20xx",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Full ECMAScript.next development and deployment workflow.",
   "main": "slushfile.js",
   "keywords": [
