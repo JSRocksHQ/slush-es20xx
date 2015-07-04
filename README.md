@@ -38,7 +38,8 @@ Then `cd` to the project root and run `npm run dev`. You're all set, happy hacki
 
 ## build configs
 
-Build paths and plugin settings can be customized by editing the chosen environment template's `build.js` file.
+Build paths and plugin settings can be customized by editing the `build.js` file.
+The build configs are kept in a separate file so you can more easily update the `gulpfile.js` by simply overwriting the old one when a new es20xx release is available.
 
 ## Deploying
 
