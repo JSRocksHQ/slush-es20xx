@@ -8,7 +8,7 @@ Full ECMAScript.next development and deployment workflow.
 
 # Install
 
-Update npm, install [Slush](https://slushjs.github.io/) and slush-es20xx:
+es20xx requires npm >= 2.11. Update npm, install [Slush](https://slushjs.github.io/) and slush-es20xx:
 
 ```
 npm install -g npm slush slush-es20xx
@@ -28,12 +28,13 @@ Then `cd` to the project root and run `npm run dev`. You're all set, happy hacki
 
 ## npm scripts
 
-- `npm run dev`: an alias for gulp's default task which does not require `gulp` globally installed.
+- `npm test`: do a complete build. This script builds the `dist` directory based on the `src` directory's contents. This includes linting `.js` files (ESLint), transpiling them, copying over non-js files and running Mocha unit tests.
 
-## gulp tasks
+- `npm run dev`: do a complete build and watch files to generate incremental builds.
 
-- `gulp` (default): do a complete build and watch files to generate incremental builds.
-- `gulp build`: this task will build the `dist` directory based on the `src` directory's contents. This includes linting `.js` files (JSHint, JSCS), transpiling them, copying over non-js files and running Mocha unit tests.
+- `npm run update-babel`: update the Babel dependencies. This script updates the Babel compiler and runtime, and fails with an error and non-zero exit status if their versions mismatch.
+
+**Note:** There may be other, non-documented scripts in the `package.json`, but those are for internal use only and may be changed or removed any time. Only use the scripts which you see documented here.
 
 ## build configs
 
