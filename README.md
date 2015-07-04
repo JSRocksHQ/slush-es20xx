@@ -16,15 +16,23 @@ npm install -g npm slush slush-es20xx
 
 # How to use
 
-Scaffold a new project:
+To scaffold a new project, `cd` to the project root and run:
 
 ```
 slush es20xx
 ```
 
-Then `cd` to the project root and run `npm run dev`. You're all set, happy hacking!
+Then whenever you want to work in the project, `cd` to the project root and run:
 
-# Architecture
+```
+npm run dev
+```
+
+You're all set, happy hacking!
+
+See the sections below for more details.
+
+# Workflow
 
 ## npm scripts
 
