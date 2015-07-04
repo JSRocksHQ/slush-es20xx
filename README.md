@@ -8,10 +8,10 @@ Full ECMAScript.next development and deployment workflow.
 
 # Install
 
-Install [Slush](https://slushjs.github.io/) and slush-es20xx:
+Update npm, install [Slush](https://slushjs.github.io/) and slush-es20xx:
 
 ```
-npm install -g slush slush-es20xx
+npm install -g npm slush slush-es20xx
 ```
 
 # How to use

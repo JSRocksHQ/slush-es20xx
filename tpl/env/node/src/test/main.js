@@ -1,13 +1,14 @@
 /*eslint-env mocha */
 /*eslint-disable no-unused-expressions */ // Should.js
 
-import 'babel-core/polyfill';
 import 'should';
-import {x as importedX} from '../..';
+import {fiveStars, hasTwoStars, mergedObject} from '../..';
+import core from 'babel-runtime/core-js';
+const {includes, findIndex} = core.Array.prototype;
 
 describe('Skeleton', function() {
 	it('should import from this package\'s entry point', function() {
-		importedX.should.equal('x');
+		fiveStars.should.equal('*****');
 	});
 	it('should support ES.next in the unit tests too', function() {
 		let foo = 'bar';
@@ -32,6 +33,8 @@ describe('Skeleton', function() {
 	});
 
 	it('should support ES.next built-in prototype methods', function() {
-		[1, 2].includes(1).should.be.true;
+		fiveStars.split('')::includes('*').should.be.true;
+		hasTwoStars.should.be.true;
+		mergedObject.should.eql({a: 1, b: 2});
 	});
 });

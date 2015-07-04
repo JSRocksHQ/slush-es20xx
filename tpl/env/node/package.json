@@ -26,8 +26,11 @@
   ],
   "scripts": {
     "dev": "gulp",
-    "prepublish": "npm install babel-core@5 gulp-babel@5 babel-runtime@5 && npm test",
-    "test": "gulp build"
+    "test": "gulp build",
+    "update-babel": "npm install --save --save-exact babel-runtime@5 && npm update --depth=1 babel-core && node scripts/check-babel.js",
+    "require-clean-work-tree": "(git update-index -q --ignore-submodules --refresh && git diff-files --quiet --ignore-submodules && git diff-index --cached --quiet --ignore-submodules HEAD --) || (echo You have uncommitted changes. Please commit or stash them. >&2 && exit 1)",
+    "preversion": "git pull && npm run --silent require-clean-work-tree && npm run --silent update-babel && (git diff-files --quiet -- package.json || git commit -m \"update Babel\" -- package.json) && npm test",
+    "postversion": "git push --follow-tags && npm publish"
   },
   "author": {
     "name": <%= JSON.stringify(authorName) %>,
@@ -35,29 +38,28 @@
   },
   "license": <%= JSON.stringify(license) %>,
   "dependencies": {
-    "babel-core": "^5.2.17",
-    "babel-runtime": "^5.2.17"
+    "babel-runtime": "^5.6.15"
   },
   "devDependencies": {
-    "babel-eslint": "^3.1.1",
-    "chalk": "^1.0.0",
+    "babel-eslint": "^3.1.20",
+    "chalk": "^1.1.0",
     "glob-manipulate": "^1.1.1",
-    "gulp": "^3.8.11",
+    "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
-    "gulp-eslint": "^0.12.0",
+    "gulp-eslint": "^0.15.0",
     "gulp-filter": "^2.0.2",
-    "gulp-load-plugins": "^0.10.0",
-    "gulp-plumber": "^1.0.0",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-src-ordered-globs": "^1.0.3",
-    "gulp-util": "^3.0.4",
+    "gulp-util": "^3.0.6",
     "gulp-watch": "^4.2.4",
-    "merge-stream": "^0.1.7",
-    "mocha": "^2.2.4",
-    "rimraf": "^2.3.3",
-    "should": "^6.0.1",
+    "merge-stream": "^0.1.8",
+    "mocha": "^2.2.5",
+    "rimraf": "^2.4.1",
+    "should": "^7.0.1",
     "stream-array": "^1.1.0",
-    "through2": "^0.6.5",
+    "through2": "^2.0.0",
     "vinyl-paths": "^1.0.0"
   }
 }

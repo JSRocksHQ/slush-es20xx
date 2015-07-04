@@ -48,17 +48,17 @@
   },
   "license": "WTFPL",
   "dependencies": {
-    "chalk": "^1.0.0",
-    "glob": "^5.0.5",
-    "gulp": "^3.8.11",
+    "chalk": "^1.1.0",
+    "glob": "^5.0.13",
+    "gulp": "^3.9.0",
     "gulp-conflict": "^0.4.0",
     "gulp-install": "^0.4.0",
     "gulp-template": "^3.0.0",
-    "inquirer": "^0.8.4",
-    "lodash": "^3.8.0"
+    "inquirer": "^0.8.5",
+    "lodash": "^3.10.0"
   },
   "devDependencies": {
-    "mocha": "^2.2.4",
-    "should": "^6.0.1"
+    "mocha": "^2.2.5",
+    "should": "^7.0.1"
   }
 }

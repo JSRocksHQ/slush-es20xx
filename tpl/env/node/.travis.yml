@@ -6,6 +6,3 @@ travisNode.map(function(version) {
 	return '  - "' + version + '"';
 }).join('\n')
 %>
-install: ""
-# `npm i` without any arguments triggers the `prepublish` script which builds and tests
-script: "npm i"
