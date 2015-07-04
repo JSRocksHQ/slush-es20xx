@@ -42,7 +42,9 @@ Build paths and plugin settings can be customized by editing the chosen environm
 
 ## Deploying
 
-Run [`npm version`](https://docs.npmjs.com/cli/version) to increment your package version. This will automatically update the Babel dependencies, make a new build and run tests. If everything succeeds, it will push your version commit and tag to the remote Git repository and publish the package on npm. You may tweak the `prepublish` and `postpublish` scripts to your needs, just edit them in the `package.json`.
+Run [`npm version`](https://docs.npmjs.com/cli/version) to increment your package version. This will automatically update the Babel dependencies, make a new build and run tests. If everything succeeds, it will push your version commit and tag to the remote Git repository and publish the package on npm.
+
+You may tweak the `prepublish` and `postpublish` scripts to your needs, just edit them in the `package.json`.
 
 # Contribute
 
