@@ -4,7 +4,7 @@
 import 'should';
 import {fiveStars, hasTwoStars, mergedObject} from '../..';
 import core from 'babel-runtime/core-js';
-const {includes, findIndex} = core.Array.prototype;
+const {includes} = core.Array.prototype;
 
 describe('Skeleton', function() {
 	it('should import from this package\'s entry point', function() {
