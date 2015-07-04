@@ -1,6 +1,6 @@
 {
   "name": <%= JSON.stringify(pkgName) %>,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": <%= JSON.stringify(pkgDescription) %>,
   "main": "entry_points/api.js",
   "keywords": <%=

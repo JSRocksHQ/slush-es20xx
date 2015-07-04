@@ -40,7 +40,11 @@ Then `cd` to the project root and run `npm run dev`. You're all set, happy hacki
 
 Build paths and plugin settings can be customized by editing the chosen environment template's `build.js` file.
 
-# Developing
+## Deploying
+
+Run [`npm version`](https://docs.npmjs.com/cli/version) to increment your package version. This will automatically update the Babel dependencies, make a new build and run tests. If everything succeeds, it will push your version commit and tag to the remote Git repository and publish the package on npm. You may tweak the `prepublish` and `postpublish` scripts to your needs, just edit them in the `package.json`.
+
+# Contribute
 
 Want to help developing slush-es20xx? Awesome! Here are the basic instructions to get you started:
 
