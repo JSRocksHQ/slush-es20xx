@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var rimraf = require('rimraf');
@@ -9,17 +9,20 @@ var mergeStream = require('merge-stream');
 var globManip = require('glob-manipulate');
 var build = require('./build');
 var copySrc = ['**'].concat(globManip.negate(build.src.js));
+var isWin = process.platform === 'win32';
+var testCommand = 'mocha';
+if (isWin) {
+	testCommand = require('which').sync(testCommand);
+}
+var testArgs = build.config.mocha.concat(build.distBase + 'test');
 
 // Run unit tests in complete isolation, see https://github.com/JSRocksHQ/harmonic/issues/122#issuecomment-85333442
 function runTests(opt, cb) {
-	var child = exec('mocha ' + build.config.mocha + ' "' + build.distBase + 'test"', {
-	  maxBuffer: 16 * 1024 * 1024,
-	}, function(err/*, stdout, stderr*/) {
-		cb(opt.ignoreErrors ? null : err);
+	spawn(testCommand, testArgs, {
+	  stdio: ['ignore', 1, 2]
+	}).on('close', function(code) {
+		cb(code && !opt.ignoreErrors ? new Error('Mocha exited with code ' + code) : null);
 	});
-
-	child.stdout.pipe(process.stdout);
-	child.stderr.pipe(process.stderr);
 }
 
 gulp.task('clean', function(cb) {
@@ -166,7 +169,7 @@ gulp.task('default', ['clean'], function(cb) {
 		.on('end', maybeEndTask);
 
 	var rl;
-	if (process.platform === 'win32') {
+	if (isWin) {
 		rl = require('readline').createInterface({
 			input: process.stdin,
 			output: process.stdout,

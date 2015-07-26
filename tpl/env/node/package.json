@@ -59,6 +59,7 @@
     "should": "^7.0.1",
     "stream-array": "^1.1.0",
     "through2": "^2.0.0",
-    "vinyl-paths": "^1.0.0"
+    "vinyl-paths": "^1.0.0",
+    "which": "^1.1.1"
   }
 }
