@@ -21,8 +21,7 @@
   "files": [
     "dist",
     "!dist/test",
-    "entry_points",
-    "LICENSE"
+    "entry_points"
   ],
   "scripts": {
     "dev": "gulp",
