@@ -1,20 +1,6 @@
 {
-  "name": <%= JSON.stringify(pkgName) %>,
   "version": "0.0.0",
-  "description": <%= JSON.stringify(pkgDescription) %>,
   "main": "entry_points/api.js",
-  "keywords": <%=
-    // extra array wrapper to reach the desired indentation level, slice its leading "[\n  " (leading whitespace striped for OTBS) and trailing "\n]"
-    JSON.stringify([keywords], null, 2).slice(4, -2)
-  %>,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/<%= ghUser %>/<%= ghRepo %>.git"
-  },
-  "bugs": {
-    "url": "https://github.com/<%= ghUser %>/<%= ghRepo %>/issues"
-  },
-  "homepage": <%= JSON.stringify(homepage) %>,
   "files": [
     "dist",
     "!dist/test",
@@ -28,11 +14,6 @@
     "preversion": "git pull && npm run --silent require-clean-work-tree && npm run --silent update-babel && (git diff-files --quiet -- package.json || git commit -m \"update Babel\" -- package.json) && npm test",
     "postversion": "git push --follow-tags && npm publish"
   },
-  "author": {
-    "name": <%= JSON.stringify(authorName) %>,
-    "email": <%= JSON.stringify(authorEmail) %>
-  },
-  "license": <%= JSON.stringify(license) %>,
   "dependencies": {
     "babel-runtime": "^5.6.15"
   },

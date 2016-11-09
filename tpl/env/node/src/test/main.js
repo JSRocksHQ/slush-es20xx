@@ -1,6 +1,9 @@
 /*eslint-env mocha */
 /*eslint-disable no-unused-expressions */ // Should.js
 
+// @#$@#;
+// require('asdasda');
+
 import 'should';
 import {fiveStars, hasTwoStars, mergedObject} from '../..';
 import core from 'babel-runtime/core-js';
@@ -9,8 +12,10 @@ const {includes} = core.Array.prototype;
 describe('Skeleton', function() {
 	it('should import from this package\'s entry point', function() {
 		fiveStars.should.equal('*****');
+		// false.should.be.true;
 	});
 	it('should support ES.next in the unit tests too', function() {
+		// false.should.be.true;
 		let foo = 'bar';
 		foo.should.equal('bar');
 

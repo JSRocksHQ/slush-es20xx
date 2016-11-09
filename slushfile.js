@@ -42,7 +42,8 @@ gulp.task('default', function(done) {
 
 		gulp.src([
 			__dirname + '/tpl/env/' + answers.env + '/**',
-			__dirname + '/tpl/licenses/' + answers.license + '/**'
+			__dirname + '/tpl/licenses/' + answers.license + '/**',
+			'!' + __dirname + '/tpl/env/' + answers.env + '/node_modules/**' // development
 		], { dot: true })
 			// Set the interpolate option in order to not conflict with ES2015 template strings
 			.pipe(template(answers, { interpolate: /<%=([\s\S]+?)%>/g }))
