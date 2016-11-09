@@ -27,10 +27,8 @@ gulp.task('default', function(done) {
 		{ when: _.callback({ env: 'node' }), name: 'installFlags', default: '--save', message: function(answers) {
 			return 'Recommended flag(s) for ' + chalk.bgGreen(' npm install ' + answers.pkgName + ' ');
 		}},
-		{ when: _.callback({ env: 'node' }), name: 'enginesNode', message: 'Compatible Node.js versions:', default: '>= 0.10' },
-		{ when: _.callback({ env: 'node' }), name: 'travisNode', message: 'Node.js versions to use in Travis CI (space-separated):', default: '0.12 iojs' },
-		{ when: _.callback({ env: 'node' }), name: 'authorName', message: 'Author name:', default: 'Ult Combo' },
-		{ when: _.callback({ env: 'node' }), name: 'authorEmail', message: 'Author email:', default: 'ultcombo@gmail.com' },
+		{ when: _.callback({ env: 'node' }), name: 'authorName', message: 'Author name:', default: 'Ult Combo' }, // TODO whoami?
+		{ when: _.callback({ env: 'node' }), name: 'authorEmail', message: 'Author email:', default: 'ultcombo@gmail.com' }, // TODO git config user.email
 		{ name: 'ghUser', message: 'GitHub repository owner username:', default: 'UltCombo' },
 		{ name: 'ghRepo', message: 'GitHub repository name:', default: function(answers) { return answers.pkgName; } },
 		{ name: 'homepage', message: 'Project homepage:', default: function(answers) { return 'https://github.com/' + answers.ghUser + '/' + answers.ghRepo; } },
@@ -39,10 +37,7 @@ gulp.task('default', function(done) {
 	], function(answers) {
 		if (!answers.moveon) return done();
 
-		['keywords', 'travisNode'].forEach(function(prop) {
-			answers[prop] = spaceSeparatedStrToArray(answers[prop]);
-		});
-
+		answers.keywords = spaceSeparatedStrToArray(answers.keywords);
 		answers.currentYear = new Date().getFullYear();
 
 		gulp.src([

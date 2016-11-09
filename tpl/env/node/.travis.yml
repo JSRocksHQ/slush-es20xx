@@ -1,8 +1,4 @@
 sudo: false
 language: node_js
 node_js:
-<%=
-travisNode.map(function(version) {
-	return '  - "' + version + '"';
-}).join('\n')
-%>
+  - "stable"

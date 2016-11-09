@@ -15,9 +15,6 @@
     "url": "https://github.com/<%= ghUser %>/<%= ghRepo %>/issues"
   },
   "homepage": <%= JSON.stringify(homepage) %>,
-  "engines": {
-    "node": <%= JSON.stringify(enginesNode) %>
-  },
   "files": [
     "dist",
     "!dist/test",
